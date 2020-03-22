@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('header') -%>
+
+<body>
+
+    <%- include('navbar') -%>
+
+    <div class="container main">
+
+        <div class="section mb-5">
+            <div class="pg-title">
+                <p class="paginator semibold">NEWS</p>
+                <h4 class="mdi mdi-newspaper">
+                    Latest Updates from different sources
+                </h4>
+            </div>
+        </div>
+
+        <div class="section mb-5">
+            <!-- <div class="pg-title">
+                <h4 class="mdi mdi-newspaper">
+                    Latest Updates
+                </h4>
+            </div> -->
+            <div class="news-sections">
+                <div class="info slider">
+                    <div class="row row-xs">
+                        <% for(var i=0; i < news_list.length; i++) { %>
+                        <div class="col-sm-6 col-lg-4 mt-2">
+                            <div class="tips-card smooth-transition">
+                                <a href="<%= news_list[i].url %>" target="_blank">
+                                    <img class="bg" alt="<%= news_list[i].title %>" src="<%= news_list[i].image %>">
+                                    <div class="overlay-block h-100 w-100 smooth-transition">
+                                        <h5><%= news_list[i].channel %></h5>
+                                        <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
+                                        <div class="description">
+                                            <p><%= news_list[i].description %></p>
+                                        </div>
+                                        <p>know more <span></span></p>
+                                    </div>
+                                    <h5><%= news_list[i].channel %></h5>
+                                    <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
+                                    <div class="description">
+                                        <p><%= news_list[i].description %></p>
+                                    </div>
+                                    <p>know more <span></span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <%- include('footer') -%>
+
+</body>
+
+</html>

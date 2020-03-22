@@ -6,6 +6,9 @@ const helmet = require('helmet');
 const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
+var db = require('./models');
+
+const news = require('./models').news;
 
 // Security headers
 app.use(cors());
@@ -26,6 +29,24 @@ app.use((req, res, next) => {
 // serve frontend files
 app.use(express.static('public'));
 
+// Check database connection
+db.sequelize
+    .authenticate()
+    .then(() => {
+        console.log('> Database connection has been established successfully.');
+
+        // sync database tables
+        db.sequelize.sync({
+                // force: true
+            })
+            .then(() => {
+                console.log('> Database & tables created!');
+            });
+    })
+    .catch(err => {
+        console.error('> Unable to connect to the database:', err);
+    });
+
 app.get("/", function (req, res) {
     res.render("index");
 });
@@ -36,13 +57,30 @@ app.get("/covid19", function (req, res) {
     });
 })
 
+app.get("/covid19/news", function (req, res) {
+
+    news.findAll({
+        limit: 10
+    }).then(news_list => {
+        console.log(news_list);
+        res.render("news", {
+            page: 'news',
+            news_list: news_list
+        });
+    });
+})
+
 // app.get("/info", function (req, res) {
 //     res.render("information", {
 //         page: 'information'
 //     });
 // })
 
-app.listen(process.env.PORT, err => {
-    if (err) throw err;
-    console.log(`> Server running on http://localhost:${process.env.PORT}`);
-});
+if (process.env.NODE_ENV == 'production') {
+    app.listen();
+} else {
+    app.listen(process.env.PORT, err => {
+        if (err) throw err;
+        console.log(`> Server running on http://localhost:${process.env.PORT}`);
+    });
+}

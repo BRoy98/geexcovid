@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "covid19",
+    "host": "192.168.64.3",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "covid19",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "geexicov_covid19",
+    "password": "tP,cho4ex)Nc",
+    "database": "geexicov_covid19",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
