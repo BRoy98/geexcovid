@@ -90,8 +90,13 @@ p {
 
 /* .container.main .section {} */
 
+.flex-spacer {
+    flex: 1 1 auto;
+}
+
 .container.main .pg-title {
     margin-bottom: 25px;
+    display: flex;
 }
 
 .paginator {

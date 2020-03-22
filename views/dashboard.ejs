@@ -24,11 +24,12 @@
                             <div class="card-body">
                                 <h6 class="title uppercase bold fs-11 gx-color-2">Total Cases</h6>
                                 <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count mr-1">324</h3>
+                                    <h3 class="count mr-1"><%= corona_data.totalcases %></h3>
                                     <p class="info fs-11 gx-color-3 mb-0">
-                                        <span class="tx-medium color-danger">
-                                            16 <i class="icon ion-md-arrow-up"></i>
-                                        </span> in ICU
+                                        <!-- <span class="tx-medium color-danger">
+                                            16
+                                        </span> in ICU -->
+                                        Live data from ABP Live
                                     </p>
                                 </div>
                                 <div id="placeholder"></div>
@@ -40,11 +41,15 @@
                             <div class="card-body">
                                 <h6 class="title uppercase bold fs-11 gx-color-2">In Hospital</h6>
                                 <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count hospital mr-1">295</h3>
+                                    <h3 class="count hospital mr-1">
+                                        <% var hos = Number(corona_data.totalcases) - (Number(corona_data.totalrecovered) + Number(corona_data.totaldeaths)) %>
+                                        <%= hos %>
+                                    </h3>
                                     <p class="info fs-11 gx-color-3 mb-0">
-                                        <span class="tx-medium color-danger">
+                                        <!-- <span class="tx-medium color-danger">
                                             16 <i class="icon ion-md-arrow-up"></i>
-                                        </span> in ICU
+                                        </span> in ICU -->
+                                        <%= Math.floor(hos / Number(corona_data.totalcases) * 100) %>% of total cases
                                     </p>
                                 </div>
                             </div>
@@ -55,11 +60,13 @@
                             <div class="card-body">
                                 <h6 class="title uppercase bold fs-11 gx-color-2">Recovered</h6>
                                 <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count recover mr-1">24</h3>
+                                    <h3 class="count recover mr-1"><%= corona_data.totalrecovered %></h3>
                                     <p class="info fs-11 gx-color-3 mb-0">
-                                        <span class="tx-medium color-danger">
+                                        <!-- <span class="tx-medium color-danger">
                                             16 <i class="icon ion-md-arrow-up"></i>
-                                        </span> in ICU
+                                        </span> in ICU -->
+                                        <%= Math.floor(Number(corona_data.totalrecovered) / Number(corona_data.totalcases) * 100) %>%
+                                        of total cases
                                     </p>
                                 </div>
                             </div>
@@ -70,11 +77,13 @@
                             <div class="card-body">
                                 <h6 class="title uppercase bold fs-11 gx-color-2">Deaths</h6>
                                 <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count death mr-1">6</h3>
+                                    <h3 class="count death mr-1"><%= corona_data.totaldeaths %></h3>
                                     <p class="info fs-11 gx-color-3 mb-0">
-                                        <span class="tx-medium color-danger">
+                                        <!-- <span class="tx-medium color-danger">
                                             16 <i class="icon ion-md-arrow-up"></i>
-                                        </span> in ICU
+                                        </span> in ICU -->
+                                        <%= Math.floor(Number(corona_data.totaldeaths) / Number(corona_data.totalcases) * 100) %>%
+                                        of total cases
                                     </p>
                                 </div>
                             </div>
@@ -89,61 +98,28 @@
                 <h4 class="mdi mdi-newspaper">
                     Latest Updates
                 </h4>
+                <div class="flex-spacer"></div>
+                <a class="more news mdi mdi-arrow-right smooth-transition" href="/covid19/news">News</a>
             </div>
             <div class="info slider">
                 <div class="owl-carousel">
+                    <% for(var i=0; i < news_list.length; i++) { %>
                     <div>
                         <div class="tips-card smooth-transition">
-                            <a href="https://www.ndtv.com/india-news/coronavirus-pandemic-live-updates-millions-in-self-quarantine-in-indias-fight-against-covid-19-pm-ap-2198662"
-                                data-ga="covid_cards_secondary|How to Self Quarantine?|" target="_blank" frmappuse="1">
-                                <img class="bg" alt="How to Self Quarantine?"
-                                    src="https://c.ndtvimg.com/2020-03/8nc5tvjs_coronavirus-india-afp_650x400_21_March_20.jpg">
+                            <a href="<%= news_list[i].url %>" target="_blank">
+                                <img class="bg" alt="<%= news_list[i].title %>" src="<%= news_list[i].image %>">
                                 <div class="overlay-block h-100 w-100 smooth-transition">
-                                    <h5>NDTV</h5>
-                                    <h3 class="bold">Railways Cancels All Trains</h3 class="bold">
+                                    <h5><%= news_list[i].channel %></h5>
+                                    <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
                                     <p>know more <span></span></p>
                                 </div>
-                                <h5>NDTV</h5>
-                                <h3 class="bold">Railways Cancels All Trains</h3 class="bold">
+                                <h5><%= news_list[i].channel %></h5>
+                                <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
                                 <p>know more <span></span></p>
                             </a>
                         </div>
                     </div>
-                    <div>
-                        <div class="tips-card smooth-transition">
-                            <a href="https://economictimes.indiatimes.com/news/politics-and-nation/coronavirus-cases-in-india-live-news-latest-updates-march22/liveblog/74754630.cms"
-                                target="_blank">
-                                <img class="bg" alt="Coronavirus Death Toll raises to 7"
-                                    src="https://img.etimg.com/thumb/msid-74754630,width-294,resizemode-4,imgsize-951082/coronavirus-cases-in-india-live-news-latest-updates-march22.jpg">
-                                <div class="overlay-block h-100 w-100 smooth-transition">
-                                    <h5>The Economic Times</h5>
-                                    <h3 class="bold">Coronavirus Death Toll raises to 7</h3>
-                                    <p>know more</p>
-                                </div>
-                                <h5>The Economic Times</h5>
-                                <h3 class="bold">Coronavirus Death Toll raises to 7</h3>
-                                <p>know more</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="tips-card smooth-transition">
-                            <a href="https://timesofindia.indiatimes.com/india/covid-19-or-common-flu-how-do-i-find-out/articleshow/74503762.cms"
-                                target="_blank">
-                                <img class="bg" alt="Lockdown to be enforced in 75 districts"
-                                    src="https://images.financialexpress.com/2020/03/curfew660-300x200.jpg">
-                                <div class="overlay-block h-100 w-100 smooth-transition">
-                                    <h5>Financial Express</h5>
-                                    <h3 class="bold">Lockdown to be enforced in 75 districts</h3>
-                                    <p>know more</p>
-                                </div>
-                                <h5>Financial Express</h5>
-                                <h3 class="bold">Lockdown to be enforced in 75 districts</h3>
-                                <p>know more</p>
-                            </a>
-                        </div>
-                    </div>
-
+                    <% } %>
                 </div>
             </div>
         </div>
