@@ -1,0 +1,215 @@
+html * {
+    font-family: manrope;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+.gx-color-1 {
+    color: #8392a5;
+}
+
+.gx-color-2 {
+    color: #1b2e4b;
+}
+
+.gx-color-3 {
+    color: #8392a5;
+}
+
+.row-xs {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.row-xs>div {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+}
+
+.navbar {
+    border-bottom: 1px solid rgba(72, 94, 144, 0.16);
+    height: 64px;
+}
+
+.navbar .navbar-brand {
+    color: #fd9701;
+    font-weight: 700;
+}
+
+.navbar .navbar-nav {
+    width: 100%;
+}
+
+.navbar-nav .nav-link {
+    transition: all 1000ms ease;
+}
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show>.nav-link {
+    color: rgba(1, 181, 15, 0.9);
+    font-weight: 600;
+}
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .show>.nav-link {
+    color: rgba(0, 126, 10, 0.9);
+}
+
+@media (min-width: 992px) {
+    .content-fixed {
+        margin-top: 60px;
+    }
+
+    .content {
+        padding: 25px;
+    }
+}
+
+.smooth-transition {
+    transition: all 0.5s ease;
+}
+
+.container.main {
+    padding: 20px;
+}
+
+/* .container.main .section {} */
+
+.container.main .pg-title {
+    margin-bottom: 25px;
+}
+
+.paginator {
+    color: #1c273c;
+    font-size: 10px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.display-flex {
+    display: -webkit-box !important;
+    display: flex !important;
+}
+
+.gx-caption {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.15px;
+    line-height: 24px;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+.gx-headline.gx-headline-4 {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: initial;
+    line-height: 24px;
+}
+
+.footer {
+    font-size: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif;
+    letter-spacing: .3px;
+    padding: 15px 25px;
+    background-color: #fafbfc;
+    color: #637388;
+    border-top: 1px solid rgba(72, 94, 144, 0.16);
+    text-transform: uppercase;
+    display: none;
+}
+
+.footer .nav a {
+    padding: 0;
+}
+
+@media (min-width: 600px) {
+    .gx-caption {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.15px;
+        line-height: 24px;
+    }
+
+    .gx-headline.gx-headline-4 {
+        font-size: 28px;
+        font-weight: 400;
+        letter-spacing: initial;
+        line-height: 36px;
+    }
+}
+
+@media (min-width: 992px) {
+    .display-lg-block {
+        display: block !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gx-caption {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.15px;
+        line-height: 24px;
+    }
+
+    .gx-headline.gx-headline-4 {
+        font-size: 28px;
+        font-weight: 400;
+        letter-spacing: initial;
+        line-height: 36px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .display-xl-flex {
+        display: -webkit-box !important;
+        display: flex !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    .gx-caption {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.15px;
+        line-height: 24px;
+    }
+
+    .gx-headline.gx-headline-4 {
+        font-size: 28px;
+        font-weight: 400;
+        letter-spacing: initial;
+        line-height: 36px;
+    }
+}
