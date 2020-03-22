@@ -70,6 +70,35 @@ app.get("/covid19/news", function (req, res) {
     });
 })
 
+app.get("/covid19/admin/addnews", function (req, res) {
+    res.render("add_news", {
+        page: 'add_news',
+        added: false
+    });
+})
+
+app.post("/covid19/admin/addnews", function (req, res) {
+
+    news.findOrCreate({
+        defaults: {
+            title: req.body.title,
+            description: req.body.description,
+            channel: req.body.channel,
+            image: req.body.image_url,
+            type: req.body.type,
+            url: req.body.url,
+        },
+        where: {
+            title: req.body.title,
+        }
+    }).then(news_list => {
+        res.render("add_news", {
+            page: 'add_news',
+            added: true
+        });
+    });
+})
+
 // app.get("/info", function (req, res) {
 //     res.render("information", {
 //         page: 'information'

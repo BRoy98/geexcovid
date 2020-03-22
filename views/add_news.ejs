@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/<% if (page ) { %><%= page %><% } %>.css">
+    <link rel="stylesheet" href="/css/font.css">
+</head>
+
+<body>
+    <div class="container main col-md-4">
+        <div class="text-center">
+            <h4>Add news</h4>
+        </div>
+        <% if (added ) { %>
+        <div class="alert alert-success" role="alert">
+            News Added
+        </div>
+        <% } %>
+        <div class="form">
+            <form action="/covid19/admin/addnews" method="post">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" id="title" name="title" aria-describedby=" text"
+                        placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea type="text" class="form-control" id="description" name="description"
+                        aria-describedby="text" placeholder="Enter Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputState">Channel</label>
+                    <select id="inputState" class="form-control" name="channel">
+                        <option selected value="Times of India">Times of India</option>
+                        <option value="NDTV">NDTV</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="text" class="form-control" id="image_url" name="image_url" aria-describedby="text"
+                        placeholder="Enter image url">
+                </div>
+                <div class="form-group">
+                    <label for="inputState">Type of News</label>
+                    <select id="inputState" class="form-control" name="type">
+                        <option selected value="0">News</option>
+                        <option value="1">Tips</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Post URL</label>
+                    <input type="text" class="form-control" id="url" name="url" aria-describedby="text"
+                        placeholder="Enter URL">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <%- include('footer') -%>
+
+</body>
+
+</html>
