@@ -1,0 +1,72 @@
+.wrapper {
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+.panel-heading {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.panel-title > a,
+.panel-title > a:active {
+  display: block;
+  padding: 15px;
+  color: #555;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  word-spacing: 3px;
+  text-decoration: none;
+}
+
+.panel-heading a:before {
+  font-family: "Material Design Icons";
+  content: "\F0734";
+  float: right;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.panel-heading.active a:before {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.snj-panel{
+	border: 1.8px solid gray;
+	border-radius:5px;
+}
+
+.snj-panel .panel {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.snj-panel .panel-heading {
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+.snj-panel .panel + .panel ,.panel{
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 1.2px gray solid;
+  box-shadow: none;
+}
+.snj-panel .panel-title a {
+  display: block;
+  text-decoration: none;
+}
+.snj-panel .panel-body {
+  line-height: rem(22px);
+  padding:0em 1em 1em 1em;
+  text-align:justify;
+}
+

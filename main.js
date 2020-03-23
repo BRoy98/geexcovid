@@ -165,6 +165,12 @@ app.post("/covid19/admin/addnews", function (req, res) {
     });
 })
 
+ app.get("/faq", function (req, res) {
+     res.render("faq", {
+         page: 'faq'
+     });
+})
+
 // app.get("/info", function (req, res) {
 //     res.render("information", {
 //         page: 'information'
