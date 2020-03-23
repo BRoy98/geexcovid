@@ -7,14 +7,15 @@
     width: 100%;
   }
 }
+
 .panel-heading {
   padding: 0;
   border: 0;
   background: none;
 }
 
-.panel-title > a,
-.panel-title > a:active {
+.panel-title>a,
+.panel-title>a:active {
   display: block;
   padding: 15px;
   color: #555;
@@ -39,9 +40,9 @@
   transform: rotate(90deg);
 }
 
-.snj-panel{
-	border: 1.8px solid gray;
-	border-radius:5px;
+.snj-panel {
+  border: 1.8px solid #d6d6d6;
+  border-radius: 5px;
 }
 
 .snj-panel .panel {
@@ -49,24 +50,28 @@
   border-radius: 0;
   box-shadow: none;
 }
+
 .snj-panel .panel-heading {
   background: none;
   border: none;
   border-radius: 0;
 }
-.snj-panel .panel + .panel ,.panel{
+
+.snj-panel .panel+.panel,
+.panel {
   margin: 0;
   border-radius: 0;
-  border-bottom: 1.2px gray solid;
+  border-bottom: 1.2px #d6d6d6 solid;
   box-shadow: none;
 }
+
 .snj-panel .panel-title a {
   display: block;
   text-decoration: none;
 }
+
 .snj-panel .panel-body {
   line-height: rem(22px);
-  padding:0em 1em 1em 1em;
-  text-align:justify;
+  padding: 0em 1em 1em 1em;
+  text-align: justify;
 }
-

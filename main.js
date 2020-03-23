@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const axios = require('axios');
 var db = require('./models');
+var corona = require('./middlewares/coronaMiddleware');
 
 const news = require('./models').news;
 
@@ -57,74 +58,50 @@ app.get("/", function (req, res) {
     res.render("index");
 });
 
-app.get("/covid19", function (req, res) {
-    axios.get('https://cdn.abplive.com/coronastats/prod/coronastats.json')
-        .then(function (response) {
-            // handle success
-            // console.log(response.data);
-            news.findAll({
-                limit: 6,
-                where: {
-                    type: 0,
-                },
-                order: [
-                    ['createdAt', 'DESC']
-                ]
-            }).then(news_list => {
-                // console.log(news_list);
-                res.render("dashboard", {
-                    page: 'dashboard',
-                    news_list: news_list,
-                    corona_data: {
-                        totalcases: response.data.totalcases,
-                        totalrecovered: response.data.totalrecovered,
-                        totaldeaths: response.data.totaldeaths
-                    }
-                });
-            });
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
+app.get("/covid19", corona.getLiveCount, function (req, res) {
+    news.findAll({
+        limit: 6,
+        where: {
+            type: 0,
+        },
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then(news_list => {
+        // console.log(news_list);
+        res.render("dashboard", {
+            page: 'dashboard',
+            news_list: news_list,
+            corona_data: {
+                totalcases: req.liveCount.data.totalcases,
+                totalrecovered: req.liveCount.data.totalrecovered,
+                totaldeaths: req.liveCount.data.totaldeaths
+            }
         });
+    });
 })
 
-app.get("/covid19/news", function (req, res) {
-
-    axios.get('https://cdn.abplive.com/coronastats/prod/coronastats.json')
-        .then(function (response) {
-
-            news.findAll({
-                limit: 12,
-                where: {
-                    type: 0,
-                },
-                order: [
-                    ['createdAt', 'DESC']
-                ]
-            }).then(news_list => {
-                // console.log(news_list);
-                res.render("news", {
-                    page: 'news',
-                    news_list: news_list,
-                    corona_data: {
-                        totalcases: response.data.totalcases,
-                        totalrecovered: response.data.totalrecovered,
-                        totaldeaths: response.data.totaldeaths
-                    }
-                });
-            });
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
+app.get("/covid19/news", corona.getLiveCount, function (req, res) {
+    news.findAll({
+        limit: 12,
+        where: {
+            type: 0,
+        },
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then(news_list => {
+        // console.log(news_list);
+        res.render("news", {
+            page: 'news',
+            news_list: news_list,
+            corona_data: {
+                totalcases: req.liveCount.data.totalcases,
+                totalrecovered: req.liveCount.data.totalrecovered,
+                totaldeaths: req.liveCount.data.totaldeaths
+            }
         });
+    });
 })
 
 app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
@@ -151,6 +128,19 @@ app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
         res.send(news_list)
     });
 })
+
+app.get("/covid19/faq", corona.getLiveCount, function (req, res) {
+    res.render("faq", {
+        page: 'faq',
+        corona_data: {
+            totalcases: req.liveCount.data.totalcases,
+            totalrecovered: req.liveCount.data.totalrecovered,
+            totaldeaths: req.liveCount.data.totaldeaths
+        }
+    });
+})
+
+// Admin routes
 
 app.get("/covid19/admin/addnews", function (req, res) {
     res.render("add_news", {
@@ -180,18 +170,6 @@ app.post("/covid19/admin/addnews", function (req, res) {
         });
     });
 })
-
- app.get("/faq", function (req, res) {
-     res.render("faq", {
-         page: 'faq'
-     });
-})
-
-// app.get("/info", function (req, res) {
-//     res.render("information", {
-//         page: 'information'
-//     });
-// })
 
 if (process.env.NODE_ENV == 'production') {
     app.listen();
