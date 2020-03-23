@@ -94,21 +94,37 @@ app.get("/covid19", function (req, res) {
 
 app.get("/covid19/news", function (req, res) {
 
-    news.findAll({
-        limit: 12,
-        where: {
-            type: 0,
-        },
-        order: [
-            ['createdAt', 'DESC']
-        ]
-    }).then(news_list => {
-        // console.log(news_list);
-        res.render("news", {
-            page: 'news',
-            news_list: news_list
+    axios.get('https://cdn.abplive.com/coronastats/prod/coronastats.json')
+        .then(function (response) {
+
+            news.findAll({
+                limit: 12,
+                where: {
+                    type: 0,
+                },
+                order: [
+                    ['createdAt', 'DESC']
+                ]
+            }).then(news_list => {
+                // console.log(news_list);
+                res.render("news", {
+                    page: 'news',
+                    news_list: news_list,
+                    corona_data: {
+                        totalcases: response.data.totalcases,
+                        totalrecovered: response.data.totalrecovered,
+                        totaldeaths: response.data.totaldeaths
+                    }
+                });
+            });
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
         });
-    });
 })
 
 app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
