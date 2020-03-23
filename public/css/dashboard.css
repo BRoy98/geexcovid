@@ -160,9 +160,9 @@ screen and (min-width: 999px) {
     .tips-card h3 {
         font-size: 24px;
         line-height: 28px;
-        height: 56px;
+        height: 112px;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -182,9 +182,9 @@ screen and (max-width: 1000px) and (orientation: landscape) {
     .tips-card h3 {
         font-size: 16px;
         line-height: 24px;
-        height: 72px;
+        height: 93px;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
