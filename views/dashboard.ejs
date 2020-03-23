@@ -10,12 +10,14 @@
     <div class="container main">
 
         <div class="section mb-5">
-            <div class="pg-title">
+            <div class="pg-title corona-count">
                 <p class="paginator semibold">INSIGHTS</p>
-                <h4 class="mdi mdi-alien">
-                    COVID-19 Virus Outbreak in India
-                </h4>
-
+                <div class="title">
+                    <h4 class="mdi mdi-alien">
+                        COVID-19 Virus Outbreak in India
+                    </h4>
+                    <span class="live">live</span>
+                </div>
             </div>
 
             <div class="container">
@@ -90,6 +92,19 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="state-scroll">
+                    <marquee class="state-data" onmouseover="this.stop();" onmouseout="this.start();" behavior="scroll"
+                        direction="left" scrollamount="10">
+                        <div class="state-list">
+                            <% for(var i=0; i < corona_data.statename.length; i++) { %>
+                            <div><span class="name"><%= corona_data.statename[i] %></span><span
+                                    class="number"><%= corona_data.statecount[i] %></span></div>
+                            <% } %>
+                        </div>
+                    </marquee>
+                    <div class="overlay"> </div>
                 </div>
             </div>
         </div>

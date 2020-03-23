@@ -75,7 +75,9 @@ app.get("/covid19", corona.getLiveCount, function (req, res) {
             corona_data: {
                 totalcases: req.liveCount.data.totalcases,
                 totalrecovered: req.liveCount.data.totalrecovered,
-                totaldeaths: req.liveCount.data.totaldeaths
+                totaldeaths: req.liveCount.data.totaldeaths,
+                statename: req.liveCount.data.statename,
+                statecount: req.liveCount.data.statecount
             }
         });
     });
