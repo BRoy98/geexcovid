@@ -61,7 +61,7 @@ app.get("/covid19", function (req, res) {
     axios.get('https://cdn.abplive.com/coronastats/prod/coronastats.json')
         .then(function (response) {
             // handle success
-            console.log(response.data);
+            // console.log(response.data);
             news.findAll({
                 limit: 6,
                 where: {
@@ -71,7 +71,7 @@ app.get("/covid19", function (req, res) {
                     ['createdAt', 'DESC']
                 ]
             }).then(news_list => {
-                console.log(news_list);
+                // console.log(news_list);
                 res.render("dashboard", {
                     page: 'dashboard',
                     news_list: news_list,
@@ -103,7 +103,7 @@ app.get("/covid19/news", function (req, res) {
             ['createdAt', 'DESC']
         ]
     }).then(news_list => {
-        console.log(news_list);
+        // console.log(news_list);
         res.render("news", {
             page: 'news',
             news_list: news_list
@@ -113,17 +113,18 @@ app.get("/covid19/news", function (req, res) {
 
 app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
     var page = req.query.page;
+    var count = req.query.count;
 
-    if (!page)
+    if (!page || !count)
         res.send({
             result: 'fail'
         });
 
-    console.log(Number(page) - 1);
+    // console.log(Number(page) - 1);
 
     news.findAll({
-        limit: 12,
-        offset: Number(page) == 1 ? 0 : 12 * (Number(page) - 1),
+        limit: Number(count),
+        offset: Number(page) == 1 ? 0 : count * (Number(page) - 1),
         where: {
             type: 0,
         },

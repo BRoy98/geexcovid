@@ -29,7 +29,7 @@
                                         <!-- <span class="tx-medium color-danger">
                                             16
                                         </span> in ICU -->
-                                        Live data from ABP Live
+                                        Live update
                                     </p>
                                 </div>
                                 <div id="placeholder"></div>
@@ -94,7 +94,7 @@
         </div>
 
         <div class="section mb-5">
-            <div class="pg-title">
+            <div class="pg-title" style="display: flex;">
                 <h4 class="mdi mdi-newspaper">
                     Latest Updates
                 </h4>
@@ -102,9 +102,9 @@
                 <a class="more news mdi mdi-arrow-right smooth-transition" href="/covid19/news">News</a>
             </div>
             <div class="info slider">
-                <div class="owl-carousel">
+                <div class="row row-xs news-grid">
                     <% for(var i=0; i < news_list.length; i++) { %>
-                    <div>
+                    <div class="col-sm-6 col-lg-4 mt-2 news-col">
                         <div class="tips-card smooth-transition">
                             <a href="<%= news_list[i].url %>" target="_blank">
                                 <img class="bg" alt="<%= news_list[i].title %>" src="<%= news_list[i].image %>">
@@ -120,6 +120,21 @@
                         </div>
                     </div>
                     <% } %>
+                </div>
+                <div style="text-align: center;">
+                    <div class="load-more smooth-transition">
+                        <span class="load-text">Load More</span>
+                        <div class="lds-roller" style="display: none;">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

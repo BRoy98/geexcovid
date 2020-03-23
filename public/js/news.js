@@ -1,13 +1,11 @@
-// const axios = require('axios');
 var isAxiosLoading = false;
 var newsPage = 1;
-var news = []
 
 $(document).ready(function () {
     window.onscroll = function (ev) {
         if (isScrolledIntoView(document.getElementById("loading")) && !isAxiosLoading) {
             isAxiosLoading = true;
-            axios.get('/covid19/news/api?page=' + (newsPage + 1))
+            axios.get('/covid19/news/api?count=12&page=' + (newsPage + 1))
                 .then(function (response) {
                     newsPage++;
                     if (response.data.length != 0)
