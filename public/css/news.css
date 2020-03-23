@@ -153,6 +153,24 @@
     text-align: center;
 }
 
+.loading {
+    text-align: center;
+    margin: auto;
+    display: grid;
+    width: fit-content;
+}
+
+.loading span {
+    padding: 25px 10px 20px;
+    font-weight: 900;
+    width: fit-content;
+}
+
+.loading .lds-ellipsis {
+    margin-top: -42px;
+    margin-bottom: -33px;
+}
+
 @media screen and (max-width: 576px) {
     .tips-card {
         margin: 0 5px;

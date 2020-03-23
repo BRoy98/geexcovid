@@ -11,6 +11,11 @@ var db = require('./models');
 
 const news = require('./models').news;
 
+var corsOptions = {
+    origin: 'http://geexec.com',
+    optionsSuccessStatus: 200
+}
+
 // Security headers
 app.use(cors());
 app.set('trust proxy', true);
@@ -90,7 +95,7 @@ app.get("/covid19", function (req, res) {
 app.get("/covid19/news", function (req, res) {
 
     news.findAll({
-        limit: 10,
+        limit: 12,
         where: {
             type: 0,
         },
@@ -103,6 +108,30 @@ app.get("/covid19/news", function (req, res) {
             page: 'news',
             news_list: news_list
         });
+    });
+})
+
+app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
+    var page = req.query.page;
+
+    if (!page)
+        res.send({
+            result: 'fail'
+        });
+
+    console.log(Number(page) - 1);
+
+    news.findAll({
+        limit: 12,
+        offset: Number(page) == 1 ? 0 : 12 * (Number(page) - 1),
+        where: {
+            type: 0,
+        },
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then(news_list => {
+        res.send(news_list)
     });
 })
 

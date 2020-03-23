@@ -26,7 +26,7 @@
             </div> -->
             <div class="news-sections">
                 <div class="info slider">
-                    <div class="row row-xs scroll-anim" id="grid">
+                    <div class="row row-xs scroll-anim news-grid" id="grid">
                         <% for(var i=0; i < news_list.length; i++) { %>
                         <div class="col-sm-6 col-lg-4 mt-2 news-col">
                             <div class="tips-card smooth-transition">
@@ -54,12 +54,26 @@
                 </div>
             </div>
 
+            <div class="loading" id="loading">
+                <span>
+                    Loading
+                </span>
+                <div class="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+
         </div>
 
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <%- include('footer') -%>
+
 
 </body>
 
