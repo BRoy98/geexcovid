@@ -70,3 +70,8 @@ function isScrolledIntoView(el) {
     //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
     return isVisible;
 }
+
+$("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
