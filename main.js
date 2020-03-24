@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
-const axios = require('axios');
 var db = require('./models');
 var corona = require('./middlewares/coronaMiddleware');
 
