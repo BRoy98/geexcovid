@@ -11,6 +11,10 @@ p {
     margin: 0;
 }
 
+.center {
+    text-align: center;
+}
+
 .gx-color-1 {
     color: #8392a5;
 }

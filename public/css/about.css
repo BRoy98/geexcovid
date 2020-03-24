@@ -1,0 +1,29 @@
+.container.main {
+    margin-bottom: 50px;
+}
+
+.about-sec {
+    display: grid;
+    margin: 30px;
+}
+
+.about-sec h3 {
+    margin: 30px;
+}
+
+.about-sec.declaimer p {
+    font-size: 12px;
+    margin-top: 50px;
+}
+
+.about-sec p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+
+.media .media-images img {
+    max-height: 150px;
+}
+
+.irc-2 {}
