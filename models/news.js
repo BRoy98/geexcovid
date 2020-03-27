@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     channel: DataTypes.STRING,
     type: DataTypes.INTEGER,
     image: DataTypes.STRING,
-    url: DataTypes.STRING
+    url: DataTypes.STRING,
+    srtt: DataTypes.STRING
   }, {});
   news.associate = function (models) {
     // associations can be defined here

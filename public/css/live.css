@@ -1,0 +1,12 @@
+:root {
+    background: #000 !important;
+}
+
+#wrapper {
+    background: #000 !important;
+}
+
+.title {
+    margin: 15px 0 30px;
+    color: #fff;
+}

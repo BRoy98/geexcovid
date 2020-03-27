@@ -1,0 +1,89 @@
+.news-card {
+    border-bottom: 1px solid #d8d8d8;
+    margin: 0 0 5px;
+    position: relative;
+    color: #202124;
+}
+
+.news-card .url {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.news-card .thumb {
+    width: 100%;
+    overflow: hidden;
+    padding-top: 50%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.news-card .thumb::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    content: '';
+    display: block;
+    background: linear-gradient(to top, rgba(0, 0, 0, .45), rgba(0, 0, 0, .001));
+}
+
+.news-card .thumb img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    object-fit: cover;
+}
+
+.news-card .channel {
+    font-size: .75rem;
+    color: #525252;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.news-card .title {
+    line-height: 1.25;
+    margin-top: 8px;
+}
+
+.title a {
+    font-weight: 600;
+}
+
+
+.news-card .time {
+    font-size: .75rem;
+    opacity: .7;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.news-card .time::before {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .news-card .title {
+        font-size: 1.4375rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .news-card .title {
+        font-size: 1.125rem;
+    }
+}

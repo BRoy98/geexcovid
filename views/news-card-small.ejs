@@ -1,0 +1,17 @@
+<div class="news-card-small collapsed">
+    <a class="url"></a>
+    <div href="<%= news_data.url %>" target="_blank" class="thumb">
+        <img class="bg" src="<%= news_data.image %>" alt="<%= news_data.title %>">
+    </div>
+    <div class="channel">
+        <%= news_data.channel %>
+    </div>
+    <h4 class="title">
+        <a href="<%= news_data.url %>">
+            <%= news_data.title %></a>
+    </h4>
+    <div class="mdi mdi-clock-outline time">
+        <!-- mdi mdi-clock-outline -->
+        <div><%= moment(news_data.createdAt, "YYYY-MM-DDTHH:mm:ss").fromNow() %></div>
+    </div>
+</div>

@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-
 router.get("/addnews", function (req, res) {
     res.render("add_news", {
         page: 'add_news',
         added: false
     });
-})
+});
 
 router.post("/addnews", function (req, res) {
 
@@ -29,7 +28,7 @@ router.post("/addnews", function (req, res) {
             added: true
         });
     });
-})
+});
 
 generateUrl = (count) => {
     if (!count)

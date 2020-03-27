@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('header') -%>
+
+<body>
+    <%- include('fb-analytics') -%>
+    <%- include('navbar') -%>
+
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <% for(var i=0; i < live_news.length; i++) { %>
+                <div class="story">
+                    <div class="data">
+                        <div class="time">
+                            <div class="timeStamp"><time><%= live_news[i].shortDateTime %></time></div>
+                        </div>
+                        <h3><%= live_news[i].title %></h3>
+                        <% if(typeof live_news[i].detailMsg != 'undefined') { %>
+                        <div class="details">
+                            <%- live_news[i].detailMsg %>
+                        </div>
+                        <% } %>
+
+                        <% if(typeof live_news[i].embedXML != 'undefined') { %>
+                        <div class="tweeter-data">
+                            <%- live_news[i].embedXML %>
+                        </div>
+                        <% } %>
+
+                        <% if(typeof live_news[i].imgUrl != 'undefined') { %>
+                        <div class="image-data">
+                            <div class="feed-image" style="float: none;">
+                                <img class="gwt-Image" width="100%" src="https://<%- live_news[i].imgUrl %>"
+                                    alt="<%= live_news[i].title %>">
+                            </div>
+
+                        </div>
+                        <% } %>
+
+                    </div>
+                </div>
+                <% } %>
+            </div>
+            <div class="col-md-12 col-lg-4">
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    <!-- /#page-content-wrapper IMPORTANT -->
+    </div>
+    <!-- /#wrapper IMPORTANT -->
+
+    <!-- Scripts -->
+    <%- include('footer') -%>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</body>
+
+</html>

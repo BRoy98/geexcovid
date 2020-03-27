@@ -99,9 +99,12 @@
                     <marquee class="state-data" onmouseover="this.stop();" onmouseout="this.start();" behavior="scroll"
                         direction="left" scrollamount="10">
                         <div class="state-list">
-                            <% for(var i=0; i < corona_data.statename.length; i++) { %>
-                            <div><span class="name"><%= corona_data.statename[i] %></span><span
-                                    class="number"><%= corona_data.statecount[i] %></span></div>
+                            <%#= corona_data.statedata %>
+                            <% for(var i=0; i < corona_data.statedata.length; i++) { %>
+                            <div>
+                                <span class="name"><%= corona_data.statedata[i].state %></span>
+                                <span class="number"><%= corona_data.statedata[i].count %></span>
+                            </div>
                             <% } %>
                         </div>
                     </marquee>
@@ -114,34 +117,78 @@
         </div>
 
         <div class="section mb-5">
-            <div class="pg-title" style="display: flex;">
-                <h4 class="mdi mdi-newspaper">
-                    Latest Updates
-                </h4>
-                <div class="flex-spacer"></div>
-                <a class="more news mdi mdi-arrow-right smooth-transition" href="/covid19/news">News</a>
-            </div>
             <div class="info slider">
-                <div class="row row-xs news-grid">
-                    <% for(var i=0; i < news_list.length; i++) { %>
-                    <div class="col-sm-6 col-lg-4 mt-2 news-col">
-                        <div class="tips-card smooth-transition">
-                            <a href="<%= news_list[i].url %>" target="_blank">
-                                <img class="bg" alt="<%= news_list[i].title %>" src="<%= news_list[i].image %>">
-                                <div class="overlay-block h-100 w-100 smooth-transition">
-                                    <h5><%= news_list[i].channel %></h5>
-                                    <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
-                                    <p>know more <span></span></p>
-                                </div>
-                                <h5><%= news_list[i].channel %></h5>
-                                <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
-                                <p>know more <span></span></p>
-                            </a>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-8 mt-2 story-col">
+                        <div class="pg-title" style="display: flex;">
+                            <img style="width: 22px;height: 22px;margin: 3px 5px 0 0;" src="/images/et-logo.png" alt="">
+                            <h4 class="">
+                                Live from Economic Times
+                            </h4>
+                            <div class="flex-spacer"></div>
+                            <a class="more news mdi mdi-arrow-right smooth-transition" target="_blank"
+                                href="https://economictimes.indiatimes.com">Visit</a>
                         </div>
+                        <% for(var i=0; i < live_news.length; i++) { %>
+                        <div class="story">
+                            <div class="data">
+                                <div class="time">
+                                    <div class="timeStamp"><time><%= live_news[i].shortDateTime %></time>
+                                    </div>
+                                </div>
+                                <h3><%= live_news[i].title %></h3>
+                                <% if(typeof live_news[i].detailMsg != 'undefined') { %>
+                                <div class="details">
+                                    <%- live_news[i].detailMsg %>
+                                </div>
+                                <% } %>
+
+                                <% if(typeof live_news[i].embedXML != 'undefined') { %>
+                                <div class="tweeter-data">
+                                    <% if(!live_news[i].embedXML.includes("marketwidget")){ %>
+                                    <%- live_news[i].embedXML %>
+                                    <% } %>
+                                </div>
+                                <% } %>
+
+                                <% if(typeof live_news[i].imgUrl != 'undefined') { %>
+                                <div class="image-data">
+                                    <div class="feed-image" style="float: none;">
+                                        <img class="gwt-Image" width="100%" src="https://<%- live_news[i].imgUrl %>"
+                                            alt="<%= live_news[i].title %>">
+                                    </div>
+
+                                </div>
+                                <% } %>
+
+                            </div>
+                        </div>
+                        <% } %>
                     </div>
-                    <% } %>
+                    <div class="col-sm-12 col-lg-4 mt-2 news-col">
+                        <div class="pg-title" style="display: flex;">
+                            <h4 class="mdi mdi-newspaper">
+                                Latest Updates
+                            </h4>
+                            <div class="flex-spacer"></div>
+                            <a class="more news mdi mdi-arrow-right smooth-transition" href="/covid19/news">News</a>
+                        </div>
+                        <div class="row news-grid">
+                            <% for(var i=0; i < news_list.length; i++) { %>
+                            <div class="col-12 mt-2 news-col">
+                                <% if (i == 0 || i % 5 == 0) {%>
+                                <%- include('news-card', {news_data: news_list[i]}) -%>
+                                <% } else { %>
+                                <%- include('news-card-small', {news_data: news_list[i]}) -%>
+                                <% } %>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div id="load-detector"></div>
+                    </div>
                 </div>
-                <div style="text-align: center;">
+
+                <!-- <div style="text-align: center;">
                     <div class="load-more smooth-transition">
                         <span class="load-text">Load More</span>
                         <div class="lds-roller" style="display: none;">
@@ -155,7 +202,7 @@
                             <div></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -214,6 +261,7 @@
 
     <!-- Scripts -->
     <%- include('footer') -%>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     </div>
     <!-- /#page-content-wrapper IMPORTANT -->

@@ -6,7 +6,9 @@ const helmet = require('helmet');
 const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
+var moment = require('moment');
 var db = require('./models');
+
 var corona = require('./middlewares/coronaMiddleware');
 
 const news = require('./models').news;
@@ -25,6 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.locals.moment = moment;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + '/views'))
 app.use((req, res, next) => {
@@ -53,36 +56,41 @@ db.sequelize
         console.error('> Unable to connect to the database:', err);
     });
 
-app.use('/admin', require('./routes/admin'));
+app.use('/covid19/admin', require('./routes/admin'));
 
 app.get("/", function (req, res) {
     res.render("index");
 });
 
-app.get("/covid19", corona.getLiveCount, function (req, res) {
-    news.findAll({
-        limit: 6,
-        where: {
-            type: 0,
-        },
-        order: [
-            ['createdAt', 'DESC']
-        ]
-    }).then(news_list => {
-        // console.log(news_list);
-        res.render("dashboard", {
-            page: 'dashboard',
-            news_list: news_list,
-            corona_data: {
-                totalcases: req.liveCount.data.totalcases,
-                totalrecovered: req.liveCount.data.totalrecovered,
-                totaldeaths: req.liveCount.data.totaldeaths,
-                statename: req.liveCount.data.statename,
-                statecount: req.liveCount.data.statecount
-            }
+app.get("/covid19", corona.getLiveCount,
+    corona.getLiveNews, corona.getAbpVideos,
+    function (req, res) {
+
+        news.findAll({
+            limit: 6,
+            where: {
+                type: 0,
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        }).then(news_list => {
+            // console.log(news_list);
+            res.render("dashboard", {
+                page: 'dashboard',
+                news_list: news_list,
+                live_news: req.liveNews.newsdata,
+                corona_data: {
+                    totalcases: req.liveCount.data.totalcases,
+                    totalrecovered: req.liveCount.data.totalrecovered,
+                    totaldeaths: req.liveCount.data.totaldeaths,
+                    statename: req.liveCount.data.statename,
+                    statecount: req.liveCount.data.statecount,
+                    statedata: req.stateData
+                }
+            });
         });
-    });
-})
+    })
 
 app.get("/covid19/news", corona.getLiveCount, function (req, res) {
     news.findAll({
@@ -132,6 +140,29 @@ app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
     });
 })
 
+app.get("/covid19/live", corona.getLiveCount, corona.getLiveNews, function (req, res) {
+    res.render("live-news", {
+        page: 'live-news',
+        live_news: req.liveNews.newsdata,
+        corona_data: {
+            totalcases: req.liveCount.data.totalcases,
+            totalrecovered: req.liveCount.data.totalrecovered,
+            totaldeaths: req.liveCount.data.totaldeaths
+        }
+    });
+})
+
+app.get("/covid19/livestream", corona.getLiveCount, function (req, res) {
+    res.render("live", {
+        page: 'live',
+        corona_data: {
+            totalcases: req.liveCount.data.totalcases,
+            totalrecovered: req.liveCount.data.totalrecovered,
+            totaldeaths: req.liveCount.data.totaldeaths
+        }
+    });
+})
+
 app.get("/covid19/about", corona.getLiveCount, function (req, res) {
     res.render("about", {
         page: 'about',
@@ -163,38 +194,38 @@ app.get("/covid19/faq", corona.getLiveCount, function (req, res) {
             totaldeaths: req.liveCount.data.totaldeaths
         }
     });
-})
+});
 
 // Admin routes
 
-app.get("/covid19/admin/addnews", function (req, res) {
-    res.render("add_news", {
-        page: 'add_news',
-        added: false
-    });
-})
+// app.get("/covid19/admin/addnews", function (req, res) {
+//     res.render("add_news", {
+//         page: 'add_news',
+//         added: false
+//     });
+// })
 
-app.post("/covid19/admin/addnews", function (req, res) {
+// app.post("/covid19/admin/addnews", function (req, res) {
 
-    news.findOrCreate({
-        defaults: {
-            title: req.body.title,
-            description: req.body.description,
-            channel: req.body.channel,
-            image: req.body.image_url,
-            type: req.body.type,
-            url: req.body.url,
-        },
-        where: {
-            title: req.body.title,
-        }
-    }).then(news_list => {
-        res.render("add_news", {
-            page: 'add_news',
-            added: true
-        });
-    });
-})
+//     news.findOrCreate({
+//         defaults: {
+//             title: req.body.title,
+//             description: req.body.description,
+//             channel: req.body.channel,
+//             image: req.body.image_url,
+//             type: req.body.type,
+//             url: req.body.url,
+//         },
+//         where: {
+//             title: req.body.title,
+//         }
+//     }).then(news_list => {
+//         res.render("add_news", {
+//             page: 'add_news',
+//             added: true
+//         });
+//     });
+// })
 
 if (process.env.NODE_ENV == 'production') {
     app.listen();

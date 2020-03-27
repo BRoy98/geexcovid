@@ -1,4 +1,9 @@
-.container.main .pg-title.title {
+.story-col {
+    padding-right: 60px;
+    border-right: 1px solid #e6e6e6;
+}
+
+.container.main .pg-title .title {
     display: flex;
 }
 
@@ -269,12 +274,16 @@
         height: 33px;
     }
 
+    .story-col {
+        display: none;
+    }
+
     .container.main .pg-title.corona-count {
         margin-bottom: 0;
         /* display: block; */
     }
 
-    .container.main .pg-title.title {
+    .container.main .pg-title .title {
         display: block;
     }
 
