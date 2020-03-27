@@ -24,6 +24,9 @@
 
 .media .media-images img {
     max-height: 150px;
+    margin: 10px;
 }
 
-.irc-2 {}
+.hol {
+    height: 120px;
+}

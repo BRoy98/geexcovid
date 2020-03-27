@@ -13,22 +13,25 @@
     <script charset="UTF-8" src="//web.webpushs.com/js/push/c62200dcdc15895c9e84536c039167f4_1.js" async></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>COVID-19 India Information | GEEXEC</title>
+    <title>Coronavisus India Updates Live | GEEXEC</title>
     <link rel="icon" type="image/x-icon" href="/covid19/favicon.png">
-    <meta name="description" content="A collection of latest news and useful data regarding the COVID-19 virus outbreak in
-        India.">
+    <meta name="description" content="Number of COVID-19 cases in India rises to <%= corona_data.totalcases %> (including
+    <%= corona_data.totalrecovered %> cured/discharged and <%= corona_data.totaldeaths %>
+    deaths): Union Health Ministry">
     <link rel="canonical" href="https://geexec.com/covid19/">
-    <meta property="og:title" content="COVID-19 India Information">
+    <meta property="og:title" content="Coronavisus India Updates Live">
     <meta property="og:url" content="https://geexec.com/covid19/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://geexec.com/covid19/og-image.png">
-    <meta property="og:description"
-        content="A collection of latest news and useful data regarding the COVID-19 virus outbreak in India.">
+    <meta property="og:description" content="Number of COVID-19 cases in India rises to <%= corona_data.totalcases %> (including
+        <%= corona_data.totalrecovered %> cured/discharged and <%= corona_data.totaldeaths %>
+        deaths): Union Health Ministry">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="https://geexec.com/covid19/">
-    <meta name="twitter:title" content="COVID-19 India Information | A Collection of Latest News and Useful Data.">
-    <meta name="twitter:description" content="Current Live Update: <%= corona_data.totalcases %> total cases. <%= corona_data.totalrecovered %>
-        recovered. <%= corona_data.totaldeaths %> deaths.">
+    <meta name="twitter:title" content="Coronavisus India Updates Live | A Collection of Latest News and Useful Data.">
+    <meta name="twitter:description" content="Number of COVID-19 cases in India rises to <%= corona_data.totalcases %> (including
+    <%= corona_data.totalrecovered %> cured/discharged and <%= corona_data.totaldeaths %>
+    deaths): Union Health Ministry">
     <meta name="twitter:image" content="https://geexec.com/covid19/og-image.png">
     <meta name="author" content="GEEXEC">
 
@@ -41,4 +44,9 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/<% if (page ) { %><%= page %><% } %>.css">
     <link rel="stylesheet" href="/css/font.css">
+    <% if (page == 'dashboard') { %>
+    <link rel="stylesheet" href="/css/live-news.css">
+    <link rel="stylesheet" href="/css/news-card.css">
+    <link rel="stylesheet" href="/css/news-card-small.css">
+    <% } %>
 </head>

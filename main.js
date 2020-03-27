@@ -53,6 +53,8 @@ db.sequelize
         console.error('> Unable to connect to the database:', err);
     });
 
+app.use('/admin', require('./routes/admin'));
+
 app.get("/", function (req, res) {
     res.render("index");
 });
@@ -129,6 +131,28 @@ app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
         res.send(news_list)
     });
 })
+
+app.get("/covid19/about", corona.getLiveCount, function (req, res) {
+    res.render("about", {
+        page: 'about',
+        corona_data: {
+            totalcases: req.liveCount.data.totalcases,
+            totalrecovered: req.liveCount.data.totalrecovered,
+            totaldeaths: req.liveCount.data.totaldeaths
+        }
+    });
+});
+
+app.get("/covid19/helpline", corona.getLiveCount, function (req, res) {
+    res.render("helpline", {
+        page: 'helpline',
+        corona_data: {
+            totalcases: req.liveCount.data.totalcases,
+            totalrecovered: req.liveCount.data.totalrecovered,
+            totaldeaths: req.liveCount.data.totaldeaths
+        }
+    });
+});
 
 app.get("/covid19/faq", corona.getLiveCount, function (req, res) {
     res.render("faq", {

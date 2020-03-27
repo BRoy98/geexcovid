@@ -3,7 +3,9 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <div class="sidebar-nav-top">
-            <a class="navbar-brand" href="/covid19">COVID-19 🇮🇳</a>
+            <a class="navbar-brand" href="/covid19">
+                <img src="/images/logo-black.png" alt="">
+            </a>
             <a id="menu-toggle-nav">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -16,24 +18,18 @@
             <li <% if (page == 'dashboard') { %> active <% } %>">
                 <a class="nav-link" href="/covid19">Insights</a>
             </li>
-            <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">More Coming Soon</a>
-                </li> -->
             <li <% if (page == 'news') { %> active <% } %>">
                 <a class="nav-link" href="/covid19/news">News</a>
+            </li>
+            <li <% if (page == 'helpline') { %> active <% } %>">
+                <a class="nav-link" href="/covid19/helpline">Helpline</a>
             </li>
             <li <% if (page == 'faq') { %> active <% } %>">
                 <a class="nav-link" href="/covid19/faq">FAQs</a>
             </li>
-            <li <% if (page == 'faq') { %> active <% } %>">
+            <li <% if (page == 'about') { %> active <% } %>">
                 <a class="nav-link" href="/covid19/about">About Us</a>
             </li>
-            <!-- <li class="nav-item <%# if (page == 'faqs') { %> active <%# } %>">
-                    <a class="nav-link" href="#">COVID Faqs</a>
-                </li>
-                <li <%# if (page == 'help') { %> active <%# } %>">
-                    <a class="nav-link" href="#">Help</a>
-                </li> -->
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -42,7 +38,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class=""><a href="#menu-toggle" class="btn btn-default toggle1 mdi mdi-menu" id="menu-toggle"></a></div>
-        <a class="navbar-brand" href="/covid19">COVID-19 🇮🇳</a>
+        <a class="navbar-brand" href="/covid19"><img src="/images/logo-black.png" alt=""></a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto justify-content-center">
@@ -55,26 +51,29 @@
                 <li class="nav-item <% if (page == 'news') { %> active <% } %>">
                     <a class="nav-link" href="/covid19/news">News</a>
                 </li>
+                <li class="nav-item <% if (page == 'helpline') { %> active <% } %>">
+                    <a class="nav-link" href="/covid19/helpline">Helpline</a>
+                </li>
                 <li class="nav-item <% if (page == 'faq') { %> active <% } %>">
                     <a class="nav-link" href="/covid19/faq">FAQs</a>
                 </li>
-                <li class="nav-item <% if (page == 'faq') { %> active <% } %>">
+                <li class="nav-item <% if (page == 'about') { %> active <% } %>">
                     <a class="nav-link" href="/covid19/about">About Us</a>
                 </li>
-                <!-- <li class="nav-item <%# if (page == 'faqs') { %> active <%# } %>">
-                    <a class="nav-link" href="#">COVID Faqs</a>
-                </li>
-                <li class="nav-item <%# if (page == 'help') { %> active <%# } %>">
-                    <a class="nav-link" href="#">Help</a>
-                </li> -->
 
 
             </ul>
         </div>
+        <div class="mobile-menu">
+
+        </div>
+        <!-- <div class="live-menu">
+            <a target="_blank" href="/covid19/live">
+                PM Modi Live
+            </a>
+        </div> -->
     </nav>
     <div class="important-notify">
-        <a target="_blank" href="https://www.youtube.com/watch?v=OmBdf7OMqDM">Watch Live: Finance Minister Sitharaman On
-            Statutory &
-            Regulatory
-            Compliance Matters: Coronavirus</a>
+        <a target="_blank" href="/covid19/live">
+            PM Modi's interaction with citizens of Varanasi via Video Conferencing</a>
     </div>
