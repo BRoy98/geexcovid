@@ -1,0 +1,474 @@
+.container.main {
+  color: #334f80;
+  margin-bottom: 50px;
+}
+
+.header {
+  text-align: center;
+  text-overflow: ellipsis;
+  padding: 2em 0em;
+  vertical-align: middle;
+}
+
+p {
+  padding: 0.5em 0;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.text {
+  /* vertical-align: middle; */
+  display: block;
+}
+
+.big {
+  font-size: 45px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+}
+
+.small {
+  font-size: 25px;
+  text-overflow: ellipsis;
+  background-color: aquamarine;
+  padding: 5px 14px;
+  width: fit-content;
+  margin: 10px auto;
+  font-weight: 500;
+}
+
+.hashtag_list {
+  color: #00000036;
+  font-size: 18px;
+}
+
+.negative {
+  margin-top: -5%;
+}
+
+.s {
+  width: 40%;
+  text-align: center;
+  background-color: white;
+  padding: 1.6em 2em;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .25) !important
+}
+
+.outer-form {}
+
+
+.step {
+
+  color: gray;
+  width: max-content;
+  padding: 0.6em 0.9em;
+  transform: translateX(-40%);
+  font-size: 2em;
+}
+
+.hashtag {
+  font-size: bolder;
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.donate-now {
+  margin: auto;
+  text-align: center;
+}
+
+.donate-now p {
+  margin: auto;
+  font-size: 36px;
+  font-weight: 700;
+  padding: 10px 20px;
+}
+
+.donate-now .donate-parent {
+  margin: 22px auto 70px;
+}
+
+.donate-now .donate-parent:hover {
+  transform: scale(1.2);
+}
+
+.donate-now a {
+  padding: 10px 20px;
+  background-color: #f4c236;
+  font-size: 20px;
+  font-weight: 400;
+  border: 0;
+  border-radius: 25px;
+  text-decoration: none;
+  margin-top: 20px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+}
+
+.donate-now a:hover {
+  color: #000;
+}
+
+.donate-now a:focus {
+  text-decoration: none;
+  border: 0;
+}
+
+.social-follow {
+  background-color: #ababab24;
+  color: #5a5a5a;
+  border-radius: 50px;
+  /* height: 50px; */
+  width: 100%;
+  padding: 10px 20px 10px 42px;
+  margin-bottom: 22px;
+  position: relative;
+  display: flex;
+  box-pack: justify;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.social-follow .follow {
+  color: #0065ff;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.hashtag_list {
+  color: #00000036;
+  font-size: 18px;
+}
+
+.social-follow.mdi::before {
+  font-size: 30px;
+  left: 10px;
+  top: 0px;
+  position: absolute;
+}
+
+.social-follow.mdi-facebook::before {
+  color: #0000ff;
+}
+
+.social-follow.mdi-instagram::before {
+  color: #940ee6;
+}
+
+.social-title {
+  font-size: 14px;
+  color: #949494;
+}
+
+.submit_next:not(.loading) .spinner-border {
+  display: none;
+}
+
+.submit_next:not(.loading) .text {
+  display: block;
+}
+
+.submit_next.loading .spinner-border {
+  display: block;
+}
+
+.submit_next.loading .text {
+  display: none;
+}
+
+.card-header .title {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.time-text {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #8392a5;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.donate-img {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 200px;
+  border: solid 1px rgb(219, 219, 219);
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.donate-img .modal-footer {
+  position: absolute;
+  bottom: 0;
+  height: 35px;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #fff;
+  justify-content: space-between;
+}
+
+.modal-footer p {
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  color: #969696;
+}
+
+.modal-footer .amount {
+  color: #19b71e;
+}
+
+.donate-stat .title {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #8392a5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.donate-stat h3 {
+  color: #10b759;
+  margin-bottom: 5px;
+  font-size: 26px;
+  letter-spacing: -1px;
+}
+
+.milestore p {
+  font-size: 12px;
+}
+
+.milestore p span {
+  color: inherit;
+  color: #0168fa;
+}
+
+.action-button {
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.action-button a {
+  font-size: 11px;
+  line-height: 1.773;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.donations-title {
+  margin-bottom: 10px;
+}
+
+.donations-title p {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  color: #8392a5;
+}
+
+.list-group {
+  font-size: 13px;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.list-group-item {
+  padding: 10px 15px;
+  border-color: #e5e9f2;
+  display: flex !important;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0 !important;
+}
+
+.list-group-item .avatar {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+.avatar-initial {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #8392a5;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  opacity: 0.5;
+  background-color: #5b47fb;
+  border-radius: 50% !important;
+}
+
+.user-data {
+  padding-left: 10px;
+}
+
+.user-data p {
+  margin-bottom: 2px;
+  margin-top: 0;
+  padding: 0%;
+}
+
+.user-data .mobile-date {
+  display: none;
+}
+
+.d-date {
+  margin-left: auto;
+}
+
+.d-date p {
+  margin: 2px 10px 0;
+}
+
+.user-profile a {
+  font-size: 26px;
+}
+
+.user-profile .mdi-instagram {
+  color: #b5b5b5;
+  margin-right: 10px;
+}
+
+label {
+  margin-bottom: 4px !important;
+  font-size: 13px !important;
+}
+
+.step-hidden {
+  display: none;
+}
+
+.social-container {
+  text-align: center;
+  margin: 32px 0 10px;
+}
+
+.social-container a {
+  margin: 0 10px;
+}
+
+.social-btn {
+  position: relative;
+  padding-left: 44px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 34px;
+  width: 34px;
+  padding: 10px 9px 7px 10px;
+  border-radius: 50%;
+}
+
+.social-btn:focus {
+  color: #fff;
+}
+
+.social-btn span {
+  font-size: 20px;
+}
+
+.social-btn.wa {
+  background-color: #10b759;
+  color: #fff;
+}
+
+.social-btn.fb {
+  background-color: #0634ff;
+  color: #fff;
+}
+
+.social-btn.tw {
+  background-color: #0084ff;
+  color: #fff;
+}
+
+.step-view {
+  height: 6px;
+  background: #9933332f;
+  margin: 10px 10px 34px;
+  border-radius: 10px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+
+  .pmcares {
+    font-size: 16px;
+  }
+
+  .big {
+    font-size: 30px;
+  }
+
+  .small {
+    font-size: 14px;
+  }
+
+  .donate-now p {
+    font-size: 23px;
+  }
+
+  .hashtag_list {
+    font-size: 14px;
+  }
+
+  .donate-stat .title {
+    font-size: 11px;
+  }
+
+  .list-group-item {
+    padding: 10px 0;
+  }
+
+  .avatar {
+    display: none !important;
+  }
+
+  .d-date p {
+    display: none !important;
+    color: #c1c1c1;
+  }
+
+  .user-data .mobile-date {
+    display: block;
+    font-size: 10px;
+    margin-top: 3px;
+    color: #b9b8b8;
+  }
+
+  .user-profile {
+    padding: 10px;
+  }
+
+}
+
+.spinner-border {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* @media (min-width: 576px) {
+  .user-data {
+    padding-left: 10px;
+  }
+} */

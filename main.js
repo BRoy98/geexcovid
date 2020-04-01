@@ -10,8 +10,10 @@ var moment = require('moment');
 var db = require('./models');
 
 var corona = require('./middlewares/coronaMiddleware');
+var donate = require('./middlewares/donateMiddleware');
 
 const news = require('./models').news;
+const donation = require('./models').donation;
 
 var corsOptions = {
     origin: 'http://geexec.com',
@@ -28,6 +30,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.locals.moment = moment;
+app.locals.hideEmail = hideEmail;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + '/views'))
 app.use((req, res, next) => {
@@ -55,6 +58,8 @@ db.sequelize
     .catch(err => {
         console.error('> Unable to connect to the database:', err);
     });
+
+console.log(moment().utc().add(1, 'days').format('YYYY-MM-DD 18:30:01'));
 
 app.use('/covid19/admin', require('./routes/admin'));
 
@@ -90,7 +95,7 @@ app.get("/covid19", corona.getLiveCount,
                 }
             });
         });
-    })
+    });
 
 app.get("/covid19/news", corona.getLiveCount, function (req, res) {
     news.findAll({
@@ -113,7 +118,7 @@ app.get("/covid19/news", corona.getLiveCount, function (req, res) {
             }
         });
     });
-})
+});
 
 app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
     var page = req.query.page;
@@ -138,7 +143,7 @@ app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
     }).then(news_list => {
         res.send(news_list)
     });
-})
+});
 
 app.get("/covid19/live", corona.getLiveCount, corona.getLiveNews, function (req, res) {
     res.render("live-news", {
@@ -150,7 +155,7 @@ app.get("/covid19/live", corona.getLiveCount, corona.getLiveNews, function (req,
             totaldeaths: req.liveCount.data.totaldeaths
         }
     });
-})
+});
 
 app.get("/covid19/livestream", corona.getLiveCount, function (req, res) {
     res.render("live", {
@@ -161,7 +166,77 @@ app.get("/covid19/livestream", corona.getLiveCount, function (req, res) {
             totaldeaths: req.liveCount.data.totaldeaths
         }
     });
-})
+});
+
+app.get("/covid19/donation", function (req, res) {
+    res.render("donation", {
+        page: 'donation',
+    });
+});
+
+app.get("/covid19/donation/about", function (req, res) {
+    res.render("about-donation", {
+        page: 'about-donation',
+    });
+});
+
+app.get("/covid19/donate", donate.countDonations, function (req, res) {
+    res.render("donate", {
+        page: 'donate',
+        donation_data: {
+            total: req.donationCountAll,
+            today: req.donationCountToday,
+            percent: Math.ceil(req.donationCountAll / 10000 * 100),
+            donationList: req.donationList,
+            todayAdd: req.followerAddToday,
+            totalAdd: req.followerAddTotal,
+        }
+    });
+});
+
+app.post("/covid19/donate/addnew", cors(corsOptions), function (req, res) { //donate.captchaVerity, 
+
+    if (!req.body.first_name || !req.body.last_name ||
+        !req.body.email_id || !req.body.instagram_id ||
+        !req.body.facebook_id || !req.body.donator_fb_id ||
+        !req.body.donator_insta_id || !req.body.donator_name) {
+        return res.send({
+            status: 'failure',
+            messege: "All fields are required"
+        });
+    }
+
+    donation.findOrCreate({
+        defaults: {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email_id: req.body.email_id,
+            instagram_id: req.body.instagram_id,
+            facebook_id: req.body.facebook_id,
+            donator_fb_id: req.body.donator_fb_id,
+            donator_insta_id: req.body.donator_insta_id,
+            donator_name: req.body.donator_name
+        },
+        where: {
+            email_id: req.body.email_id,
+        }
+    }).then(data => {
+        res.send({
+            status: 'success',
+        });
+    });
+});
+
+// app.get("/covid19/live-tv", corona.getLiveCount, function (req, res) {
+//     res.render("video-ex", {
+//         page: 'video-play',
+//         corona_data: {
+//             totalcases: req.liveCount.data.totalcases,
+//             totalrecovered: req.liveCount.data.totalrecovered,
+//             totaldeaths: req.liveCount.data.totaldeaths
+//         }
+//     });
+// })
 
 app.get("/covid19/about", corona.getLiveCount, function (req, res) {
     res.render("about", {
@@ -196,36 +271,31 @@ app.get("/covid19/faq", corona.getLiveCount, function (req, res) {
     });
 });
 
-// Admin routes
+app.get("/covid19/privacy", corona.getLiveCount, function (req, res) {
+    res.render("pp", {
+        page: 'privacy',
+        corona_data: {
+            totalcases: req.liveCount.data.totalcases,
+            totalrecovered: req.liveCount.data.totalrecovered,
+            totaldeaths: req.liveCount.data.totaldeaths
+        }
+    });
+});
 
-// app.get("/covid19/admin/addnews", function (req, res) {
-//     res.render("add_news", {
-//         page: 'add_news',
-//         added: false
-//     });
-// })
+app.get("/covid19/declaimer", corona.getLiveCount, function (req, res) {
+    res.render("dp", {
+        page: 'declaimer',
+        corona_data: {
+            totalcases: req.liveCount.data.totalcases,
+            totalrecovered: req.liveCount.data.totalrecovered,
+            totaldeaths: req.liveCount.data.totaldeaths
+        }
+    });
+});
 
-// app.post("/covid19/admin/addnews", function (req, res) {
-
-//     news.findOrCreate({
-//         defaults: {
-//             title: req.body.title,
-//             description: req.body.description,
-//             channel: req.body.channel,
-//             image: req.body.image_url,
-//             type: req.body.type,
-//             url: req.body.url,
-//         },
-//         where: {
-//             title: req.body.title,
-//         }
-//     }).then(news_list => {
-//         res.render("add_news", {
-//             page: 'add_news',
-//             added: true
-//         });
-//     });
-// })
+app.get("**", corona.getLiveCount, function (req, res) {
+    res.redirect("/covid19");
+});
 
 if (process.env.NODE_ENV == 'production') {
     app.listen();
@@ -234,4 +304,29 @@ if (process.env.NODE_ENV == 'production') {
         if (err) throw err;
         console.log(`> Server running on http://localhost:${process.env.PORT}`);
     });
+}
+
+function hideEmail(emailId) {
+    var a = emailId.split("@");
+    var cMail = a[0];
+    var a = a[1].split('.');
+    var cDoamin = a[0];
+    var cTld = a[1];
+
+    var mail = "";
+    var domain = "";
+    var tld = "";
+    for (var i in cMail) {
+        if (i > 0 && i < cMail.length - 1) mail += "*";
+        else mail += cMail[i];
+    }
+    for (var i in cDoamin) {
+        if (i > 0 && i < cDoamin.length) domain += "*";
+        else domain += cDoamin[i];
+    }
+    for (var i in cTld) {
+        if (i > 0 && i < cTld.length) tld += "*";
+        else tld += cTld[i];
+    }
+    return mail + "@" + domain + '.' + tld;
 }

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161610484-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-161610484-1');
+    </script>
+    <script charset="UTF-8" src="//web.webpushs.com/js/push/c62200dcdc15895c9e84536c039167f4_1.js" async></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>#IndiaFightsCorona</title>
+    <link rel="icon" type="image/x-icon" href="/covid19/favicon.png">
+    <meta name="description"
+        content="Money is not the only way to donate. Your small contribution can make a big difference!">
+    <link rel="canonical" href="https://geexec.com/covid19/donate">
+    <meta property="og:title" content="#IndiaFightsCorona">
+    <meta property="og:url" content="https://geexec.com/covid19/donate">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://geexec.com/images/donate-og.png">
+    <meta property="og:description"
+        content="Money is not the only way to donate. Your small contribution can make a big difference!">
+    <meta property="fb:app_id" content="251143779392708">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://geexec.com/covid19/donate">
+    <meta name="twitter:title" content="#IndiaFightsCorona">
+    <meta name="twitter:image" content="https://geexec.com/images/donate-og.png">
+    <meta name="author" content="GEEXEC">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/css/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owlcarousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/donate.css">
+    <link rel="stylesheet" href="/css/font.css">
+</head>
+
+<body>
+    <%- include('fb-analytics') -%>
+    <%- include('navbar') -%>
+
+    <div class="container main">
+        <div class="container">
+            <div class="header">
+                <div class="text">
+                    <h4 class="pmcares">We are donating to #PMCares</h4>
+                    <h4 class="big">Your Subscription is your donation</h4>
+                    <div class="small">We donate &#8377 1 , for every new follower</div>
+                    <h5 class="hashtag_list">#IndiaFightsCorona #IndiaGives </h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-header d-flex justify-content-between">
+                        <h6 class="title">#IndiaFightsCorona</h6>
+                    </div>
+                    <div class="card-body donate-stat">
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="title">Today's Donation</p>
+                                <h3 class="count">&#8377 <%= donation_data.today + donation_data.todayAdd %>.00</h3>
+                            </div>
+                            <div class="col-6">
+                                <p class="title">Total Donation</p>
+                                <h3 class="count">&#8377 <%= donation_data.total + donation_data.totalAdd %>.00</h3>
+                            </div>
+                        </div>
+
+                        <div class="milestore">
+                            <p>
+                                Current Milestone: <span>&#8377 10,000.00</span>
+                            </p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<%= donation_data.percent %>"
+                                style="background-color: #ff5e00; height: 100%; 
+                                width:<%= donation_data.percent %>%;" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                        <div class="d-flex action-button">
+                            <a data-target="#shareModel" data-toggle="modal"
+                                style="border-color: #c0ccda; color: rgba(27,46,75,0.7);"
+                                class="btn btn-white flex-fill tx-spacing-1">Share</a>
+                            <a data-target="#donateModel" id="show-donate" data-toggle="modal"
+                                class="btn btn-primary flex-fill" style="margin-left: 10px; color: #fff;">Subscribe</a>
+                            <!-- margin-left: 10px; -->
+                        </div>
+                        <div class="d-flex donations-title">
+                            <p class="tx-uppercase tx-11 tx-spacing-1 tx-color-03 tx-medium mg-b-0">Recent Subscribers
+                            </p>
+                        </div>
+                        <ul class="list-group">
+                            <% for(var i in donation_data.donationList) { %>
+                            <li class="list-group-item">
+                                <div class="avatar">
+                                    <span
+                                        class="avatar-initial"><%= donation_data.donationList[i].first_name[0] %></span>
+                                </div>
+                                <div class="user-data">
+                                    <p class="tx-mediu"><%= donation_data.donationList[i].first_name %>
+                                        <%= donation_data.donationList[i].last_name %></p>
+                                    <small><%= hideEmail(donation_data.donationList[i].email_id) %></small>
+                                    <p class="mobile-date">
+                                        <%= moment(donation_data.donationList[i].createdAt, "YYYY-MM-DDTHH:mm:ss").format('Do MMMM, YYYY') %>
+                                    </p>
+                                </div>
+                                <div class="d-date">
+                                    <p>
+                                        <%= moment(donation_data.donationList[i].createdAt, "YYYY-MM-DDTHH:mm:ss").format('Do MMMM, YYYY') %>
+                                        <!-- .fromNow() -->
+                                    </p>
+                                </div>
+                                <div class="user-profile">
+                                    <a class="mdi mdi-instagram" target="_blank"
+                                        href="https://instagram.com/<%= donation_data.donationList[i].instagram_id %>"></a>
+                                    <a style="font-size: 26px;color: #b5b5b5" class="mdi mdi-facebook" target="_blank"
+                                        href="https://facebook.com/<%= donation_data.donationList[i].facebook_id %>"></a>
+                                </div>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <h6 class="title">Our Donations</h6>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">Donations</h5> -->
+                        <p class="time-text">We will transfer the total amount of each day at 10:00 PM.</p>
+                        <div class="donate-image-list">
+                            <div class="donate-img">
+                                <a class="pop">
+                                    <img style="width: 100%;" src="/images/donation-3-31.jpg" alt="">
+                                </a>
+                                <div class="modal-footer">
+                                    <p class="amount">&#8377 37 donated</p>
+                                    <p>31st March</p>
+                                    <!-- <button class="btn btn-primary submit_next" disabled="">
+                                        <span class="text">Close</span>
+                                    </button> -->
+                                </div>
+                            </div>
+                            <div class="donate-img">
+                                <a class="pop">
+                                    <img style="width: 100%;" src="/images/donation-3-30.jpg" alt="">
+                                </a>
+                                <div class="modal-footer">
+                                    <p class="amount">&#8377 20 donated</p>
+                                    <p>30th March</p>
+                                    <!-- <button class="btn btn-primary submit_next" disabled="">
+                                        <span class="text">Close</span>
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Donate Dialog -->
+        <div class="modal fade" id="donateModel" tabindex="-1" role="dialog" aria-labelledby="Donate"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">#IndiaFightsCorona</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="step-view">
+                            <div class="step-1"></div>
+                            <div class="step-2"></div>
+                            <div class="step-3"></div>
+                        </div>
+                        <div id="stepOne">
+                            <h5 class="social-title mdi mdi-check">Step 1: Follow us on Instagram</h5>
+                            <a id="insta_active_2" style="cursor: pointer;">
+                                <div class="social-follow mdi mdi-instagram">
+                                    @geexec
+                                    <!-- <a>Follow</a> -->
+                                    <a id="insta_active" class="follow">Follow</a>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div id="stepTwo" class="step-hidden">
+                            <h5 class="social-title mdi mdi-check">Step 2. Like us on Facebook</h5>
+                            <a id="fb_active_2" style="cursor: pointer;">
+                                <div class="social-follow mdi mdi-facebook">
+                                    @geexechq
+                                    <a id="fb_active" class="follow">Like</a>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div id="stepThree" class="step-hidden">
+                            <div class="warnn">
+                            </div>
+                            <h5 class="social-title">Step 3: Let us know about you</h5>
+                            <form class="sub-form">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Wick" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" id="emailId" aria-describedby="emailHelp"
+                                        placeholder="you@mail.com" required>
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                        anyone else or send you promotional emails. It is just to keep a track of our
+                                        donation.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="insta_id">Instagram ID</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">instagram.com/</div>
+                                        </div>
+                                        <input type="text" class="form-control" id="instaId" placeholder="instagram"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fb_id">Facebook ID</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">facebook.com/</div>
+                                        </div>
+                                        <input type="text" class="form-control" id="fbId" placeholder="facebook"
+                                            required>
+                                    </div>
+                                </div>
+
+
+                                <!-- <div class="form-group form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">By pressing continue, you agree to our </label>
+							</div> -->
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary submit_prev step-hidden">previous</button>
+                        <button class="btn btn-primary submit_next" disabled>
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <span class="text">Continue</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Dialog -->
+        <div class="modal fade" id="shareModel" tabindex="-1" role="dialog" aria-labelledby="Share" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Share</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 style="font-size: 15px; color: #909090;">Share with your friends and family and help us
+                            donate more!</h5>
+                        <div class="social-container">
+                            <a class="social-btn wa" target="_blank"
+                                href="https://wa.me/?text=It%20is%20the%20best%20opportunity%20to%20stand%20for%20the%20nation.%20Each%20and%20every%20contribution%20is%20very%20important%20for%20the%20country.%0A%0AAs%20a%20group%20of%20volunteers%2C%20*Geexec*%20have%20decided%20to%20*donate%20%E2%82%B91%20to%20the%20%23PMcares%20relief%20fund%20for%20every%20new%20follower%20on%20their%20social%20media%20handles*.%20Make%20them%20donate%20more%20by%20sharing%20this%20message%20to%20everyone.%0A%0A*Your%20Subscription%20is%20Your%20Donation*%0A%23IndiaFightsCorona%20%23geexec%0A%0ATo%20contribute%2C%20visit%20http%3A%2F%2Fdonations.coronain.live">
+                                <span class=" mdi mdi-whatsapp"></span></a>
+                            <a class="social-btn fb" target="_blank">
+                                <span class=" mdi mdi-facebook"></span></a>
+                            <a class="social-btn tw" target="_blank"
+                                href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdonations.coronain.live&hashtags=IndiaFightsCorona%2Cgeexec&text=As%20a%20group%20of%20volunteers%2C%20%40geexechq%20have%20decided%20to%20donate%20%E2%82%B91%20to%20the%20%23PMCares%20relief%20fund%20for%20every%20new%20follower%20on%20their%20social%20media%20handles.%20Retweet%20and%20make%20them%20donate%20more!%20Visit%3A">
+                                <span class=" mdi mdi-twitter"></span></a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary submit_button" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thanks Dialog -->
+        <div class="modal fade" id="thanksModel" tabindex="-1" role="dialog" aria-labelledby="Donate"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thank you! #IndiaFightsCorona</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Thank you so much for your generous contribution to the country. We truly appreciate your
+                            commitment to serve the Nation!<br><br>You can always help us donate more by sharing this to
+                            your friends and family.</p>
+                        <div class="social-container">
+                            <a class="social-btn wa" target="_blank"
+                                href="https://wa.me/?text=It%20is%20the%20best%20opportunity%20to%20stand%20for%20the%20nation.%20Each%20and%20every%20contribution%20is%20very%20important%20for%20the%20country.%0A%0AAs%20a%20group%20of%20volunteers%2C%20*Geexec*%20have%20decided%20to%20*donate%20%E2%82%B91%20to%20the%20%23PMcares%20relief%20fund%20for%20every%20new%20follower%20on%20their%20social%20media%20handles*.%20Make%20them%20donate%20more%20by%20sharing%20this%20message%20to%20everyone.%0A%0A*Your%20Subscription%20is%20Your%20Donation*%0A%23IndiaFightsCorona%20%23geexec%0A%0ATo%20contribute%2C%20visit%20http%3A%2F%2Fdonations.coronain.live">
+                                <span class=" mdi mdi-whatsapp"></span></a>
+                            <a class="social-btn fb" target="_blank">
+                                <span class=" mdi mdi-facebook"></span></a>
+                            <a class="social-btn tw" target="_blank"
+                                href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdonations.coronain.live&hashtags=IndiaFightsCorona%2Cgeexec&text=As%20a%20group%20of%20volunteers%2C%20%40geexechq%20have%20decided%20to%20donate%20%E2%82%B91%20to%20the%20%23PMCares%20relief%20fund%20for%20every%20new%20follower%20on%20their%20social%20media%20handles.%20Retweet%20and%20make%20them%20donate%20more!%20Visit%3A">
+                                <span class=" mdi mdi-twitter"></span></a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/covid19" class="btn btn-primary submit_button">Done</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Image Dialog -->
+        <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <img src="" class="imagepreview" style="width: 100%;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary submit_prev">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Captcha -->
+        <div style="position: relative; margin: 80px auto 10px">
+            <div class="g-recaptcha" data-sitekey="6LdC7-QUAAAAAPbdZO4wyPtPfM9p9VJ66AD0hFOA" data-callback="onSubmit"
+                data-size="invisible">
+            </div>
+        </div>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    </div>
+
+    <footer class="footer" style="display:block; position: fixed; bottom: 0; width: 100%; height: 45px; z-index: 100">
+        <div class="d-flex justify-content-between" style="margin-top: 0px !important;">
+            <div>
+                <span>Created by <a href="https://geexec.com">Geexec.com</a></span>
+            </div>
+            <div>
+                <nav class="nav">
+                    <a href="mailto:covid19@geexec.com" class="nav-link">Spot an Error?</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
+    <!-- <script src="https://www.jsdelivr.com/package/npm/chart.min.js?path=dist"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/donate.js"></script>
+
+    </div>
+    <!-- /#page-content-wrapper IMPORTANT -->
+
+    </div>
+    <!-- /#wrapper IMPORTANT -->
+
+</body>
+
+</html>
