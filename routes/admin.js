@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const news = require('../models').news;
 
 router.get("/addnews", function (req, res) {
     res.render("add_news", {

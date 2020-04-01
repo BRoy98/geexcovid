@@ -20,38 +20,32 @@ $(document).ready(function () {
                         // console.log(element);
                         $(".news-grid").append(
                             `
-                            <div class="col-sm-6 col-lg-4 mt-2 news-col">
-                            <div class="tips-card smooth-transition">
-                                <a href = "` + element.url + `"
-                                target = "_blank">
-                                    <img class = "bg"
-                                    alt = "` + element.title + `"
-                                    src = "` + element.image + `" >
-                                    <div class="overlay-block h-100 w-100 smooth-transition">
-                                        <h5>` + element.channel + `</h5>
-                                        <h3 class="bold">` + element.title + `</h3 class="bold">
-                                        <div class="description">
-                                            <p>` + element.description + `</p>
-                                        </div>
-                                        <p>know more <span></span></p>
+                            <div class="col-sm-12 col-lg-6 mt-2 news-col">
+                                <div class="news-card-small collapsed">
+                                    <a class="url"></a>
+                                    <div class="thumb">
+                                        <img class="bg" src="` + element.image + `" alt="` + element.title + `">
                                     </div>
-                                    <h5>` + element.channel + `</h5>
-                                    <h3 class="bold">` + element.title + `</h3 class="bold">
-                                    <div class="description">
-                                        <p>` + element.description + `</p>
+                                    <div class="channel">
+                                        ` + element.channel + `
                                     </div>
-                                    <p>know more <span></span></p>
-                                </a>
+                                    <h4 class="title">
+                                        <a href = "` + element.url + `">
+                                            ` + element.title + `</a>
+                                    </h4>
+                                    <div class="mdi mdi-clock-outline time">
+                                        <div> ` + moment(element.createdAt, "YYYY-MM-DDTHH:mm:ss").fromNow() + `</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                             `
                         );
                     });
 
-                    console.log(response);
+                    // console.log(response);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 });
         }
     };

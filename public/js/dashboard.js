@@ -2,9 +2,6 @@ var isAxiosLoading = false;
 var newsPage = 1;
 
 $(document).ready(function () {
-
-    console.log(moment().startOf('hour').fromNow());
-
     window.onscroll = function (ev) {
         if (isScrolledIntoView(document.getElementById("load-detector")) && !isAxiosLoading) {
             isAxiosLoading = true;
@@ -48,7 +45,7 @@ $(document).ready(function () {
                     });
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 });
         }
     }

@@ -19,15 +19,15 @@
 
 .story .time .timeStamp {
     position: absolute;
-    color: #ed193b;
+    color: #fff;
     font-size: 13px;
     font-weight: normal;
     padding: 5px 8px;
     left: -95px;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     border: solid 1px #ed193b;
     display: inline-block;
-    background: #fff;
+    background: #ed193b;
 }
 
 .story .details {
@@ -55,9 +55,16 @@
 }
 
 @media (max-width: 768px) {
+
+    .story .data h3,
+    .story .data h2 {
+        font-size: 12px;
+    }
+
     .story .time .timeStamp {
         left: 0px;
-        top: -43px;
+        top: -35px;
+        font-size: 11px
     }
 
     .story .time .timeStamp::before {
@@ -72,7 +79,8 @@
 
     .story .data {
         width: 100%;
-        padding-left: 20px;
+        border-left: 0;
+        padding-left: 0;
         padding-top: 40px;
     }
 }

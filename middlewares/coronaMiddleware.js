@@ -39,7 +39,7 @@ exports.getLiveNews = async (req, res, next) => {
 
     try {
         // get news update from economictimes
-        var liveNews = await axios.get('https://economictimes.indiatimes.com/etstatic/liveblogs/msid-74820249,callback-liveBlogTypeALL-1.htm'); //?_=' + milliseconds);
+        var liveNews = await axios.get('https://economictimes.indiatimes.com/etstatic/liveblogs/msid-74880611,callback-liveBlogTypeALL-1.htm'); //?_=' + milliseconds);
         // process the news data
         liveNews = JSON.parse(liveNews.data.replace("liveBlogTypeALL (", "{ \"newsdata\":").replace(/.$/, "}"));
 

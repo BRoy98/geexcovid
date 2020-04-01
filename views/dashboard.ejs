@@ -171,7 +171,8 @@
                                 Latest Updates
                             </h4>
                             <div class="flex-spacer"></div>
-                            <a class="more news mdi mdi-arrow-right smooth-transition" href="/covid19/news">News</a>
+                            <a class="more news mdi mdi-arrow-right smooth-transition"
+                                onclick='FB.AppEvents.logEvent("home_newsbtn_click")' href="/covid19/news">News</a>
                         </div>
                         <div class="row news-grid">
                             <% for(var i=0; i < news_list.length; i++) { %>
@@ -185,6 +186,12 @@
                             <% } %>
                         </div>
                         <div id="load-detector"></div>
+                        <div style="text-align: center; text-align: center; margin-top: 10px; font-size: 14px;">
+                            Loading More Updates
+                            <div class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

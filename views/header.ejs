@@ -18,7 +18,7 @@
     <meta name="description" content="Number of COVID-19 cases in India rises to <%= corona_data.totalcases %> (including
     <%= corona_data.totalrecovered %> cured/discharged and <%= corona_data.totaldeaths %>
     deaths): Union Health Ministry">
-    <link rel="canonical" href="https://geexec.com/covid19/">
+    <link rel="canonical" href="https://geexec.com/covid19/<% if (page && page != 'dashboard') { %><%= page %><% } %>">
     <meta property="og:title" content="Coronavisus India Updates Live">
     <meta property="og:url" content="https://geexec.com/covid19/">
     <meta property="og:type" content="website">
@@ -44,9 +44,13 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/<% if (page ) { %><%= page %><% } %>.css">
     <link rel="stylesheet" href="/css/font.css">
-    <% if (page == 'dashboard') { %>
+    <% if (page == 'dashboard' || page == 'news') { %>
     <link rel="stylesheet" href="/css/live-news.css">
     <link rel="stylesheet" href="/css/news-card.css">
     <link rel="stylesheet" href="/css/news-card-small.css">
+    <% } %>
+
+    <% if (page == 'video-play') { %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.7.5/video-js.css" rel="stylesheet">
     <% } %>
 </head>

@@ -28,26 +28,9 @@
                 <div class="info slider">
                     <div class="row row-xs news-grid" id="grid">
                         <% for(var i=0; i < news_list.length; i++) { %>
-                        <div class="col-sm-6 col-lg-4 mt-2 news-col">
-                            <div class="tips-card smooth-transition">
-                                <a href="<%= news_list[i].url %>" target="_blank">
-                                    <img class="bg" alt="<%= news_list[i].title %>" src="<%= news_list[i].image %>">
-                                    <div class="overlay-block h-100 w-100 smooth-transition">
-                                        <h5><%= news_list[i].channel %></h5>
-                                        <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
-                                        <div class="description">
-                                            <p><%= news_list[i].description %></p>
-                                        </div>
-                                        <p>know more <span></span></p>
-                                    </div>
-                                    <h5><%= news_list[i].channel %></h5>
-                                    <h3 class="bold"><%= news_list[i].title %></h3 class="bold">
-                                    <div class="description">
-                                        <p><%= news_list[i].description %></p>
-                                    </div>
-                                    <p>know more <span></span></p>
-                                </a>
-                            </div>
+                        <div class="col-sm-12 col-lg-6 mt-2 news-col">
+                            <%- include('news-card-small', {news_data: news_list[i]}) -%>
+
                         </div>
                         <% } %>
                     </div>

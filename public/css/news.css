@@ -1,3 +1,7 @@
+.row-xs>div {
+    padding: 5px 20px !important;
+}
+
 .card.insight {
     cursor: pointer;
 }
