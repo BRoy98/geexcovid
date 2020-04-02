@@ -22,72 +22,82 @@
 
             <div class="container">
                 <div class="row row-xs">
-                    <div class="col-6 col-sm-6 col-lg-3 mt-2">
+                    <div class="col-12 col-sm-6 col-lg-3 mt-2">
                         <div class="card insight smooth-transition">
                             <div class="card-body">
-                                <h6 class="title uppercase bold fs-11 gx-color-2">Total Cases</h6>
-                                <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count mr-1"><%= corona_data.totalcases %></h3>
-                                    <p class="info fs-11 gx-color-3 mb-0">
-                                        <!-- <span class="tx-medium color-danger">
-                                            16
-                                        </span> in ICU -->
+                                <h6 class="title uppercase bold fs-11 gx-color-2 smooth-transition">Total Cases</h6>
+                                <div class="data display-flex display-xl-flex">
+                                    <h3 id="totalCase" class="count mr-1 total"><%= corona_data.totalcases %></h3>
+                                    <p id="totalCaseDetails" class="info fs-11 gx-color-3 mb-0 smooth-transition">
                                         Live update
-                                    </p>
+                                    </p><span class="stat-info" id="stat-date-total"> </span>
                                 </div>
-                                <div id="placeholder"></div>
+
+                                <div class="chart-stat">
+                                    <div id="stat-chart-total" class="stat-chart">
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-lg-3 mt-2">
+                    <div class="col-12 col-sm-6 col-lg-3 mt-2">
                         <div class="card insight smooth-transition">
                             <div class="card-body">
                                 <h6 class="title uppercase bold fs-11 gx-color-2">In Hospital</h6>
-                                <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count hospital mr-1">
+                                <div class="data display-flex display-xl-flex">
+                                    <h3 id="totalHospital" class="count hospital mr-1">
                                         <% var hos = Number(corona_data.totalcases) - (Number(corona_data.totalrecovered) + Number(corona_data.totaldeaths)) %>
                                         <%= hos %>
                                     </h3>
-                                    <p class="info fs-11 gx-color-3 mb-0">
-                                        <!-- <span class="tx-medium color-danger">
-                                            16 <i class="icon ion-md-arrow-up"></i>
-                                        </span> in ICU -->
+                                    <p id="totalHospitalDetails" class="info fs-11 gx-color-3 mb-0">
                                         <%= Math.floor(hos / Number(corona_data.totalcases) * 100) %>% of total cases
-                                    </p>
+                                    </p><span class="stat-info" id="stat-date-hospital"> </span>
+                                </div>
+
+                                <div class="chart-stat">
+                                    <div id="stat-chart-hospital" class="stat-chart">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-lg-3 mt-2">
+                    <div class="col-12 col-sm-6 col-lg-3 mt-2">
                         <div class="card insight smooth-transition">
                             <div class="card-body">
                                 <h6 class="title uppercase bold fs-11 gx-color-2">Recovered</h6>
-                                <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count recover mr-1"><%= corona_data.totalrecovered %></h3>
-                                    <p class="info fs-11 gx-color-3 mb-0">
-                                        <!-- <span class="tx-medium color-danger">
-                                            16 <i class="icon ion-md-arrow-up"></i>
-                                        </span> in ICU -->
+                                <div class="data display-flex display-xl-flex">
+                                    <h3 id="totalRecovery" class="count recover mr-1">
+                                        <%= corona_data.totalrecovered %></h3>
+                                    <p id="recoveryCaseDetails" class="info fs-11 gx-color-3 mb-0">
                                         <%= Math.floor(Number(corona_data.totalrecovered) / Number(corona_data.totalcases) * 100) %>%
                                         of total cases
-                                    </p>
+                                    </p><span class="stat-info" id="stat-date-recovery"> </span>
+                                </div>
+
+                                <div class="chart-stat">
+                                    <div id="stat-chart-recovery" class="stat-chart">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-lg-3 mt-2">
+                    <div class="col-12 col-sm-6 col-lg-3 mt-2">
                         <div class="card insight smooth-transition">
                             <div class="card-body">
                                 <h6 class="title uppercase bold fs-11 gx-color-2">Deaths</h6>
-                                <div class="data display-flex display-xl-flex display-lg-block">
-                                    <h3 class="count death mr-1"><%= corona_data.totaldeaths %></h3>
-                                    <p class="info fs-11 gx-color-3 mb-0">
-                                        <!-- <span class="tx-medium color-danger">
-                                            16 <i class="icon ion-md-arrow-up"></i>
-                                        </span> in ICU -->
+                                <div class="data display-flex display-xl-flex ">
+                                    <h3 id="totalDeath" class="count death mr-1"><%= corona_data.totaldeaths %></h3
+                                        id="totalRecovery">
+                                    <p id="deathCaseDetails" class="info fs-11 gx-color-3 mb-0">
                                         <%= Math.floor(Number(corona_data.totaldeaths) / Number(corona_data.totalcases) * 100) %>%
                                         of total cases
-                                    </p>
+                                    </p><span class="stat-info" id="stat-date-death"> </span>
+                                </div>
+
+                                <div class="chart-stat">
+                                    <div id="stat-chart-death" class="stat-chart">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -119,18 +129,54 @@
         <div class="section mb-5">
             <div class="info slider">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-8 mt-2 story-col">
+                    <div class="col-sm-12 col-lg-8 mt-2 news-col">
                         <div class="pg-title" style="display: flex;">
-                            <img style="width: 22px;height: 22px;margin: 3px 5px 0 0;" src="/images/et-logo.png" alt="">
-                            <h4 class="">
-                                Live from Economic Times
+                            <h4 class="mdi mdi-newspaper">
+                                Latest Updates
+                            </h4>
+                            <div class="flex-spacer"></div>
+                            <a class="more news mdi mdi-arrow-right smooth-transition"
+                                onclick='FB.AppEvents.logEvent("home_newsbtn_click")' href="/news">News</a>
+                        </div>
+                        <div class="row news-grid">
+                            <% for(var i=0; i < news_list.length; i++) { %>
+                            <div class="col-12 col-md-6 mt-2 news-col">
+                                <% if (i == 0 || i % 5 == 0) {%>
+                                <%- include('news-card-small', {news_data: news_list[i]}) -%>
+                                <% } else { %>
+                                <%- include('news-card-small', {news_data: news_list[i]}) -%>
+                                <% } %>
+                            </div>
+                            <% } %>
+                        </div>
+                        <!-- <div id="load-detector"></div> -->
+                        <!-- <div style="text-align: center; text-align: center; margin-top: 10px; font-size: 14px;">
+                            Loading More Updates
+                            <div class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="col-sm-12 col-lg-4 twitter-data">
+                        <div class="pg-title" style="display: flex;">
+                            <h4 class="mdi mdi-twitter">
+                                Twitter Updates
                             </h4>
                             <div class="flex-spacer"></div>
                             <a class="more news mdi mdi-arrow-right smooth-transition" target="_blank"
-                                href="https://economictimes.indiatimes.com">Visit</a>
+                                href="https://twitter.com/MoHFW_INDIA">Visit</a>
                         </div>
+
+                        <div class="twitter-card">
+                            <a class="twitter-timeline"
+                            data-height="435"
+                                href="https://twitter.com/MoHFW_INDIA?ref_src=twsrc%5Etfw">Tweets by
+                                MoHFW_INDIA Loading...</a>
+                        </div>
+
                         <% for(var i=0; i < live_news.length; i++) { %>
-                        <div class="story">
+                        <!-- <div class="story">
                             <div class="data">
                                 <div class="time">
                                     <div class="timeStamp"><time><%= live_news[i].shortDateTime %></time>
@@ -162,36 +208,8 @@
                                 <% } %>
 
                             </div>
-                        </div>
+                        </div> -->
                         <% } %>
-                    </div>
-                    <div class="col-sm-12 col-lg-4 mt-2 news-col">
-                        <div class="pg-title" style="display: flex;">
-                            <h4 class="mdi mdi-newspaper">
-                                Latest Updates
-                            </h4>
-                            <div class="flex-spacer"></div>
-                            <a class="more news mdi mdi-arrow-right smooth-transition"
-                                onclick='FB.AppEvents.logEvent("home_newsbtn_click")' href="/covid19/news">News</a>
-                        </div>
-                        <div class="row news-grid">
-                            <% for(var i=0; i < news_list.length; i++) { %>
-                            <div class="col-12 mt-2 news-col">
-                                <% if (i == 0 || i % 5 == 0) {%>
-                                <%- include('news-card', {news_data: news_list[i]}) -%>
-                                <% } else { %>
-                                <%- include('news-card-small', {news_data: news_list[i]}) -%>
-                                <% } %>
-                            </div>
-                            <% } %>
-                        </div>
-                        <div id="load-detector"></div>
-                        <div style="text-align: center; text-align: center; margin-top: 10px; font-size: 14px;">
-                            Loading More Updates
-                            <div class="progress">
-                                <div class="indeterminate"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -268,6 +286,7 @@
 
     <!-- Scripts -->
     <%- include('footer') -%>
+    <%- include('dashboard-js') -%>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     </div>

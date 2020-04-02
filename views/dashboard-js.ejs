@@ -1,0 +1,311 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js" charset="utf-8"></script>
+<script>
+    $(document).ready(function () {
+        var totalCaseToday = <%= corona_data.totalcases %>;
+        var totalHospitalToday = <%= Number(corona_data.totalcases) - (Number(corona_data.totalrecovered) + Number(corona_data.totaldeaths)) %>;
+        var totalRecoveryToday = <%= corona_data.totalrecovered %>;
+        var totalDeathToday = <%= corona_data.totaldeaths %>;
+
+        /*----
+        Arrays for Total Cases START
+        ----*/
+        var totalCases = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>[<%= index %>,<%= dd.totalconfirmed %>],<% }) %>
+        ];
+
+        var totalCaseIncreaseRate = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>
+                // <%= Number(dd.totalconfirmed) %>
+                [<%= index %>,<%= index == 0 ? dd.totalconfirmed : (Number(dd.totalconfirmed) - Number(corona_data.covidIndiaData.raw[index - 1].totalconfirmed)) %>],
+            <% }) %>
+        ];
+
+        var totalCaseIncreaseDates = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>
+                "<%= dd.date %>",
+            <% }) %>
+        ];
+        /*----
+        Arrays for Total Cases END
+        ----*/
+
+        /*----
+        Arrays for Hospitalized Cases START
+        ----*/
+
+        var totalHospitalized = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>
+                [<%= index %>,<%= Number(corona_data.covidIndiaData.raw[index].totalconfirmed) - (Number(corona_data.covidIndiaData.raw[index].totaldeceased) + Number(corona_data.covidIndiaData.raw[index].totalrecovered)) %>],
+            <% }) %>
+        ];
+
+        var totalHospitalizedIncreaseRate = [];
+
+        totalHospitalized.forEach((dd, index) => {
+            if(index == 0)
+                totalHospitalizedIncreaseRate.push([index, dd[1]]);
+            else
+                totalHospitalizedIncreaseRate.push([index, ((totalHospitalized[index][1] - totalHospitalized[index - 1][1]) < 0) ? 0 : (totalHospitalized[index][1] - totalHospitalized[index - 1][1])]);
+        })
+
+        
+        /*----
+        Arrays for Hospitalized Cases END
+        ----*/
+
+        /*----
+        Arrays for Recovery Cases START
+        ----*/
+
+        var totalRecovery = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>[<%= index %>,<%= dd.totalrecovered %>],<% }) %>
+        ];
+
+        var totalRecoveryIncreaseRate = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>
+                [<%= index %>,<%= index == 0 ? dd.totalrecovered : (Number(dd.totalrecovered) - Number(corona_data.covidIndiaData.raw[index - 1].totalrecovered)) %>],
+            <% }) %>
+        ];
+        /*----
+        Arrays for Recovery Cases END
+        ----*/
+
+        /*----
+        Arrays for Death Cases START
+        ----*/
+
+        var totalDeath = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>[<%= index %>,<%= dd.totaldeceased %>],<% }) %>
+        ];
+
+        var totalDeathIncreaseRate = [
+            <% corona_data.covidIndiaData.raw.forEach((dd, index) => { %>
+                [<%= index %>,<%= index == 0 ? dd.totaldeceased : (Number(dd.totaldeceased) - Number(corona_data.covidIndiaData.raw[index - 1].totaldeceased)) %>],
+            <% }) %>
+        ];
+        /*----
+        Arrays for Death Cases END
+        ----*/
+
+        // var totalData = <%#= JSON.stringify(corona_data.covidIndiaData.totalcaseArray) %>
+        // console.log(totalCaseIncreaseRate);
+
+        $.plot('#stat-chart-total', [{
+            data: totalCaseIncreaseRate,
+            color: '#ff073a'
+        }], {
+            series: {
+                shadowSize: 0,
+                lines: {
+                    show: true,
+                    // steps: true,
+                    lineWidth: 2,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0
+                        }, {
+                            opacity: .5
+                        }]
+                    }
+                },
+                points: {
+                    show: true,
+                    radius: 1
+                }
+            },
+            propagateSupportedGesture: true,
+            grid: {
+                borderWidth: 0,
+                labelMargin: 0,
+                hoverable: true,
+                clickable: true
+            },
+            yaxis: {
+                show: false,
+                min: 0
+            },
+            xaxis: {
+                show: false
+            }
+        });
+
+        $.plot('#stat-chart-hospital', [{
+            data: totalHospitalizedIncreaseRate,
+            color: '#ed8d14'
+        }], {
+            series: {
+                shadowSize: 0,
+                lines: {
+                    show: true,
+                    lineWidth: 2,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0
+                        }, {
+                            opacity: .5
+                        }]
+                    }
+                },
+                points: {
+                    show: true,
+                    radius: 1
+                }
+            },
+            propagateSupportedGesture: true,
+            grid: {
+                borderWidth: 0,
+                labelMargin: 0,
+                hoverable: true,
+                clickable: true
+            },
+            yaxis: {
+                show: false,
+                min: 0,
+            },
+            xaxis: {
+                show: false
+            }
+        });
+
+        $.plot('#stat-chart-recovery', [{
+            data: totalRecoveryIncreaseRate,
+            color: '#14d41b'
+        }], {
+            series: {
+                shadowSize: 0,
+                lines: {
+                    show: true,
+                    lineWidth: 2,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0
+                        }, {
+                            opacity: .5
+                        }]
+                    }
+                },
+                points: {
+                    show: true,
+                    radius: 1
+                }
+            },
+            propagateSupportedGesture: true,
+            grid: {
+                borderWidth: 0,
+                labelMargin: 0,
+                hoverable: true,
+                clickable: true
+            },
+            yaxis: {
+                show: false,
+                min: 0,
+            },
+            xaxis: {
+                show: false
+            }
+        });
+
+        $.plot('#stat-chart-death', [{
+            data: totalDeathIncreaseRate,
+            color: '#6c757d'
+        }], {
+            series: {
+                shadowSize: 0,
+                lines: {
+                    show: true,
+                    lineWidth: 2,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0
+                        }, {
+                            opacity: .5
+                        }]
+                    }
+                },
+                points: {
+                    show: true,
+                    radius: 1
+                }
+            },
+            propagateSupportedGesture: true,
+            grid: {
+                borderWidth: 0,
+                labelMargin: 0,
+                hoverable: true,
+                clickable: true
+            },
+            yaxis: {
+                show: false,
+                min: 0,
+            },
+            xaxis: {
+                show: false
+            }
+        });
+
+        $("#stat-chart-total").bind("plothover", function (event, pos, obj) {
+            if (obj != null) {
+                $("#totalCase").text(totalCases[obj.datapoint[0]][1]);
+                $("#totalCaseDetails").text("+" + obj.datapoint[1]);
+                $('#stat-date-total').text(" " + totalCaseIncreaseDates[obj.datapoint[0]]);
+                // $().addClass("gx-color-denger");
+            } else {
+                $("#totalCase").text(totalCaseToday);
+                $("#totalCaseDetails").text(" Live update");
+                $('#stat-date-total').text("");
+                // $().removeClass("gx-color-denger");
+            }
+        });
+
+
+        $("#stat-chart-hospital").bind("plothover", function (event, pos, obj) {
+            if (obj != null) {
+                $("#totalHospital").text(totalCases[obj.datapoint[0]][1]);
+                $("#totalHospitalDetails").text("+" + obj.datapoint[1]);
+                $('#stat-date-hospital').text(" " + totalCaseIncreaseDates[obj.datapoint[0]]);
+                // $().addClass("gx-color-denger");
+            } else {
+                $("#totalCatotalHospitalse").text(totalHospitalToday);
+                $("#totalHospitalDetails").text(
+                    Math.floor(Number(totalHospitalToday) / Number(totalCaseToday) * 100) + "% of total cases");
+                $('#stat-date-hospital').text("");
+                // $().removeClass("gx-color-denger");
+            }
+        });
+
+        $("#stat-chart-recovery").bind("plothover", function (event, pos, obj) {
+            if (obj != null) {
+                $("#totalRecovery").text(totalRecovery[obj.datapoint[0]][1]);
+                $("#recoveryCaseDetails").text("+" + obj.datapoint[1]);
+                $('#stat-date-recovery').text(" " + totalCaseIncreaseDates[obj.datapoint[0]]);
+                // $().addClass("gx-color-denger");
+            } else {
+                $("#totalRecovery").text(totalRecoveryToday);
+                $("#recoveryCaseDetails").text(
+                    Math.floor(Number(totalRecoveryToday) / Number(totalCaseToday) * 100) + "% of total cases");
+                $('#stat-date-recovery').text("");
+                // $().removeClass("gx-color-denger");
+            }
+        });
+
+        $("#stat-chart-death").bind("plothover", function (event, pos, obj) {
+            if (obj != null) {
+                $("#totalDeath").text(totalDeath[obj.datapoint[0]][1]);
+                $("#deathCaseDetails").text("+" + obj.datapoint[1]);
+                $('#stat-date-death').text(" " + totalCaseIncreaseDates[obj.datapoint[0]]);
+                // $().addClass("gx-color-denger");
+            } else {
+                $("#totalDeath").text(totalDeathToday);
+                $("#deathCaseDetails").text(
+                    Math.floor(Number(totalDeathToday) / Number(totalCaseToday) * 100) + "% of total cases");
+                $('#stat-date-death').text("");
+                // $().removeClass("gx-color-denger");
+            }
+        });
+    })
+</script>

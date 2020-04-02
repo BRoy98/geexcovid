@@ -63,12 +63,8 @@ console.log(moment().utc().add(1, 'days').format('YYYY-MM-DD 18:30:01'));
 
 app.use('/covid19/admin', require('./routes/admin'));
 
-app.get("/", function (req, res) {
-    res.render("index");
-});
-
-app.get("/covid19", corona.getLiveCount,
-    corona.getLiveNews, corona.getAbpVideos,
+app.get("/", corona.getLiveCount,
+    corona.getLiveNews,
     function (req, res) {
 
         news.findAll({
@@ -86,18 +82,21 @@ app.get("/covid19", corona.getLiveCount,
                 news_list: news_list,
                 live_news: req.liveNews.newsdata,
                 corona_data: {
-                    totalcases: req.liveCount.data.totalcases,
-                    totalrecovered: req.liveCount.data.totalrecovered,
-                    totaldeaths: req.liveCount.data.totaldeaths,
-                    statename: req.liveCount.data.statename,
-                    statecount: req.liveCount.data.statecount,
-                    statedata: req.stateData
+                    totalcases: req.liveCount.totalcases,
+                    totalrecovered: req.liveCount.totalrecovered,
+                    totaldeaths: req.liveCount.totaldeaths,
+                    statename: req.liveCount.statename,
+                    statecount: req.liveCount.statecount,
+                    statedata: req.stateData,
+                    covidIndiaData: {
+                        raw: req.covidIndia.raw,
+                    }
                 }
             });
         });
     });
 
-app.get("/covid19/news", corona.getLiveCount, function (req, res) {
+app.get("/news", corona.getLiveCount, function (req, res) {
     news.findAll({
         limit: 12,
         where: {
@@ -112,9 +111,9 @@ app.get("/covid19/news", corona.getLiveCount, function (req, res) {
             page: 'news',
             news_list: news_list,
             corona_data: {
-                totalcases: req.liveCount.data.totalcases,
-                totalrecovered: req.liveCount.data.totalrecovered,
-                totaldeaths: req.liveCount.data.totaldeaths
+                totalcases: req.liveCount.totalcases,
+                totalrecovered: req.liveCount.totalrecovered,
+                totaldeaths: req.liveCount.totaldeaths,
             }
         });
     });
@@ -145,42 +144,42 @@ app.get("/covid19/news/api", cors(corsOptions), function (req, res) {
     });
 });
 
-app.get("/covid19/live", corona.getLiveCount, corona.getLiveNews, function (req, res) {
-    res.render("live-news", {
-        page: 'live-news',
-        live_news: req.liveNews.newsdata,
-        corona_data: {
-            totalcases: req.liveCount.data.totalcases,
-            totalrecovered: req.liveCount.data.totalrecovered,
-            totaldeaths: req.liveCount.data.totaldeaths
-        }
-    });
-});
+// app.get("/live", corona.getLiveCount, corona.getLiveNews, function (req, res) {
+//     res.render("live-news", {
+//         page: 'live-news',
+//         live_news: req.liveNews.newsdata,
+//         corona_data: {
+//             totalcases: req.liveCount.totalcases,
+//             totalrecovered: req.liveCount.totalrecovered,
+//             totaldeaths: req.liveCount.totaldeaths,
+//         }
+//     });
+// });
 
-app.get("/covid19/livestream", corona.getLiveCount, function (req, res) {
+app.get("/livestream", corona.getLiveCount, function (req, res) {
     res.render("live", {
         page: 'live',
         corona_data: {
-            totalcases: req.liveCount.data.totalcases,
-            totalrecovered: req.liveCount.data.totalrecovered,
-            totaldeaths: req.liveCount.data.totaldeaths
+            totalcases: req.liveCount.totalcases,
+            totalrecovered: req.liveCount.totalrecovered,
+            totaldeaths: req.liveCount.totaldeaths,
         }
     });
 });
 
-app.get("/covid19/donation", function (req, res) {
+app.get("/donation", function (req, res) {
     res.render("donation", {
         page: 'donation',
     });
 });
 
-app.get("/covid19/donation/about", function (req, res) {
+app.get("/donation/about", function (req, res) {
     res.render("about-donation", {
         page: 'about-donation',
     });
 });
 
-app.get("/covid19/donate", donate.countDonations, function (req, res) {
+app.get("/donate", donate.countDonations, function (req, res) {
     res.render("donate", {
         page: 'donate',
         donation_data: {
@@ -238,63 +237,63 @@ app.post("/covid19/donate/addnew", cors(corsOptions), function (req, res) { //do
 //     });
 // })
 
-app.get("/covid19/about", corona.getLiveCount, function (req, res) {
+app.get("/about", corona.getLiveCount, function (req, res) {
     res.render("about", {
         page: 'about',
         corona_data: {
-            totalcases: req.liveCount.data.totalcases,
-            totalrecovered: req.liveCount.data.totalrecovered,
-            totaldeaths: req.liveCount.data.totaldeaths
+            totalcases: req.liveCount.totalcases,
+            totalrecovered: req.liveCount.totalrecovered,
+            totaldeaths: req.liveCount.totaldeaths,
         }
     });
 });
 
-app.get("/covid19/helpline", corona.getLiveCount, function (req, res) {
+app.get("/helpline", corona.getLiveCount, function (req, res) {
     res.render("helpline", {
         page: 'helpline',
         corona_data: {
-            totalcases: req.liveCount.data.totalcases,
-            totalrecovered: req.liveCount.data.totalrecovered,
-            totaldeaths: req.liveCount.data.totaldeaths
+            totalcases: req.liveCount.totalcases,
+            totalrecovered: req.liveCount.totalrecovered,
+            totaldeaths: req.liveCount.totaldeaths,
         }
     });
 });
 
-app.get("/covid19/faq", corona.getLiveCount, function (req, res) {
+app.get("/faq", corona.getLiveCount, function (req, res) {
     res.render("faq", {
         page: 'faq',
         corona_data: {
-            totalcases: req.liveCount.data.totalcases,
-            totalrecovered: req.liveCount.data.totalrecovered,
-            totaldeaths: req.liveCount.data.totaldeaths
+            totalcases: req.liveCount.totalcases,
+            totalrecovered: req.liveCount.totalrecovered,
+            totaldeaths: req.liveCount.totaldeaths,
         }
     });
 });
 
-app.get("/covid19/privacy", corona.getLiveCount, function (req, res) {
+app.get("/privacy", corona.getLiveCount, function (req, res) {
     res.render("pp", {
         page: 'privacy',
         corona_data: {
-            totalcases: req.liveCount.data.totalcases,
-            totalrecovered: req.liveCount.data.totalrecovered,
-            totaldeaths: req.liveCount.data.totaldeaths
+            totalcases: req.liveCount.totalcases,
+            totalrecovered: req.liveCount.totalrecovered,
+            totaldeaths: req.liveCount.totaldeaths,
         }
     });
 });
 
-app.get("/covid19/declaimer", corona.getLiveCount, function (req, res) {
+app.get("/declaimer", corona.getLiveCount, function (req, res) {
     res.render("dp", {
         page: 'declaimer',
         corona_data: {
-            totalcases: req.liveCount.data.totalcases,
-            totalrecovered: req.liveCount.data.totalrecovered,
-            totaldeaths: req.liveCount.data.totaldeaths
+            totalcases: req.liveCount.totalcases,
+            totalrecovered: req.liveCount.totalrecovered,
+            totaldeaths: req.liveCount.totaldeaths,
         }
     });
 });
 
 app.get("**", corona.getLiveCount, function (req, res) {
-    res.redirect("/covid19");
+    res.redirect("/");
 });
 
 if (process.env.NODE_ENV == 'production') {

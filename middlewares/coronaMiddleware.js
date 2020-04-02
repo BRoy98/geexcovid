@@ -6,8 +6,9 @@ exports.getLiveCount = async (req, res, next) => {
 
     try {
         const liveCount = await axios.get('https://cdn.abplive.com/coronastats/prod/coronastats.json');
+        const covidIndiaData = await axios.get('https://api.covid19india.org/data.json');
 
-        if (!liveCount) {
+        if (!liveCount || !covidIndiaData) {
             res.send("SERVER ERROR");
         }
 
@@ -23,8 +24,12 @@ exports.getLiveCount = async (req, res, next) => {
             return b.count - a.count
         })
 
-        req.liveCount = liveCount;
+        req.liveCount = liveCount.data;
         req.stateData = stateData;
+        req.covidIndia = {
+            raw: covidIndiaData.data.cases_time_series
+        };
+        // req.covidIndiaTotalCase = totalCase;
 
         if (!liveCount) {
             res.send("SERVER ERROR");
@@ -63,7 +68,7 @@ exports.getAbpVideos = async (req, res, next) => {
             '&playlistId=UURWFSbif-RFENbBrSiez1DA' + '&key=' + process.env.YOUTUBE_API_KEY);
 
         // process the news data
-        console.log('getAbpVideos', abpVideos.data);
+        // console.log('getAbpVideos', abpVideos.data);
         req.abpVideos = abpVideos;
     } catch (error) {
         console.log(error);

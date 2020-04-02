@@ -39,6 +39,10 @@ a:focus {
     color: #8392a5;
 }
 
+.gx-color-denger {
+    color: rgb(255, 7, 58);
+}
+
 .row-xs {
     margin-left: -20px;
     margin-right: -20px;
